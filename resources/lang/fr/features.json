@@ -1,0 +1,55 @@
+{
+  "auth": {
+    "login-form": {
+      "title": "Connexion à votre compte",
+      "subtitle": "Entrez votre email et votre mot de passe ci-dessous pour vous connecter",
+
+      "logo_alt": "Logo Bismuth",
+
+      "fields": {
+        "email": {
+          "label": "Adresse email",
+          "placeholder": "email@exemple.com"
+        },
+        "password": {
+          "label": "Mot de passe",
+          "placeholder": "Mot de passe"
+        }
+      },
+      "buttons": {
+        "submit": "Se connecter"
+      }
+    }
+  },
+  "company": {
+    "company-data-table": {
+      "headers": {
+        "name": "Nom de l'entreprise",
+        "address": "Adresse",
+        "postalCode": "Code postal",
+        "city": "Ville",
+        "actions": "Actions"
+      }
+    },
+    "company-menubar": {
+      "file": {
+        "title": "Fichier",
+        "items": {
+          "new": "Nouveau"
+        }
+      }
+    },
+    "company-form": {
+      "title": {
+        "create": "Créer une nouvelle entreprise",
+        "edit": "Modifie l'entreprise"
+      },
+      "fields": {
+        "name": "Nom de l'entreprise",
+        "address": "Adresse",
+        "postal_code": "Code postal",
+        "city": "Ville"
+      }
+    }
+  }
+}

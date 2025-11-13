@@ -1,0 +1,37 @@
+{
+  "app-sidebar": {
+    "groups": {
+      "application": "Application"
+    },
+    "items": {
+      "statistics": "Statistiques",
+      "quotes": "Devis",
+      "companies": "Entreprises",
+      "contacts": "Contacts"
+    }
+  },
+  "theme-toggle": {
+    "items": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    }
+  },
+  "submit-button": "Sauvegarder",
+  "search-input": {
+    "results": "résultat(s)",
+    "placeholder": "Rechercher..."
+  },
+  "confirm-dialog": {
+    "actions": {
+      "cancel": "Annuler",
+      "confirm": "Confirmer"
+    },
+    "default_title": "Confirmer l'action",
+    "default_description": "Êtes-vous sûr de vouloir effectuer cette action ?"
+  },
+  "data-table-pagination": {
+    "previous": "Précédent",
+    "next": "Suivant"
+  }
+}

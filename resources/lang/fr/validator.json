@@ -1,0 +1,12 @@
+{
+  "shared": {
+    "fields": {
+      "email": "adresse e-mail",
+      "password": "nom"
+    },
+    "messages": {
+      "required": "Le champ {field} doit être défini.",
+      "email": "L'adresse e-mail doit être valide"
+    }
+  }
+}
