@@ -2,7 +2,11 @@
   "shared": {
     "fields": {
       "email": "adresse e-mail",
-      "password": "nom"
+      "password": "mot de passe",
+      "city": "ville",
+      "address": "adresse",
+      "name": "nom",
+      "postalCode": "code postal"
     },
     "messages": {
       "required": "Le champ {field} doit être défini.",
