@@ -8,9 +8,9 @@ export default [
       '@unicorn/filename-case': [
         'error',
         {
-          case: 'kebabCase'
-        }
-      ]
-    }
-  }
+          case: 'kebabCase',
+        },
+      ],
+    },
+  },
 ]
