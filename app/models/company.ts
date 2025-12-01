@@ -1,8 +1,10 @@
 import { DateTime } from 'luxon'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import { withSearchable } from '#models/mixins/searchable'
 import { withSortable } from '#models/mixins/sortable'
+import User from '#models/user'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 const Searchable = withSearchable(['name', 'address', 'postalCode', 'city'])
 const Sortable = withSortable(['name', 'address', 'postalCode', 'city'], 'name', 'asc')
@@ -13,6 +15,9 @@ export default class Company extends compose(BaseModel, Searchable, Sortable) {
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
 
   @column()
   declare name: string
@@ -26,6 +31,9 @@ export default class Company extends compose(BaseModel, Searchable, Sortable) {
   @column()
   declare city: string
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  @column()
+  declare userId: number
+
+  @belongsTo(() => User)
+  declare user: BelongsTo<typeof User>
 }
