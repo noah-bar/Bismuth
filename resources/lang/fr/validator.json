@@ -6,7 +6,9 @@
       "city": "ville",
       "address": "adresse",
       "name": "nom",
-      "postalCode": "code postal"
+      "postalCode": "code postal",
+      "firstName": "prénom",
+      "lastName": "nom"
     },
     "messages": {
       "required": "Le champ {field} doit être défini.",

@@ -51,5 +51,34 @@
         "city": "Ville"
       }
     }
+  },
+  "contact": {
+    "contact-data-table": {
+      "headers": {
+        "first_name": "Prénom",
+        "last_name": "Nom",
+        "email": "Adresse email",
+        "actions": "Actions"
+      }
+    },
+    "contact-menubar": {
+      "file": {
+        "title": "Fichier",
+        "items": {
+          "new": "Nouveau"
+        }
+      }
+    },
+    "contact-form": {
+      "title": {
+        "create": "Créer un nouveau client",
+        "edit": "Modifie le client"
+      },
+      "fields": {
+        "first_name": "Prénom",
+        "last_name": "Nom",
+        "email": "Adresse email"
+      }
+    }
   }
 }
