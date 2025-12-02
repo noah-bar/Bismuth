@@ -15,7 +15,7 @@ export class ContactService {
   }
 
   public getContacts(): ModelQueryBuilderContract<typeof Contact> {
-    return Contact.query().where('userId', this.user.id).orderBy('firstName').orderBy('lastName')
+    return Contact.query().where('userId', this.user.id)
   }
 
   public async getContact(id: number): Promise<Contact> {
