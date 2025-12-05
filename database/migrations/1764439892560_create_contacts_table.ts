@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.timestamp('updated_at')
       table.string('first_name')
       table.string('last_name')
+      table.string('full_name')
       table.string('email')
       table.integer('company_id')
       table.integer('user_id')

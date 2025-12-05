@@ -37,11 +37,8 @@ export function ContactDataTable({ data, className }: ContactDataTableProps) {
     <DataTable data={data} className={className}>
       <DataTableHeader>
         <DataTableRow>
-          <SortableDataTableHead sortKey={'firstName'}>
-            {t('features.contact.contact-data-table.headers.first_name')}
-          </SortableDataTableHead>
-          <SortableDataTableHead sortKey={'lastName'}>
-            {t('features.contact.contact-data-table.headers.last_name')}
+          <SortableDataTableHead sortKey={'fullName'}>
+            {t('features.contact.contact-data-table.headers.fullName')}
           </SortableDataTableHead>
           <SortableDataTableHead sortKey={'email'}>
             {t('features.contact.contact-data-table.headers.email')}
@@ -52,8 +49,7 @@ export function ContactDataTable({ data, className }: ContactDataTableProps) {
       <DataTableBody>
         {data.data.map((contact) => (
           <DataTableRow key={contact.id}>
-            <DataTableCell>{contact.firstName}</DataTableCell>
-            <DataTableCell>{contact.lastName}</DataTableCell>
+            <DataTableCell>{contact.fullName}</DataTableCell>
             <DataTableCell>{contact.email}</DataTableCell>
             <DataTableCell>
               <div className={'flex gap-2 w-full justify-center items-center'}>
