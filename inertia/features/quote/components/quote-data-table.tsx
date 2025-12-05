@@ -14,6 +14,7 @@ import { Link, router } from '@inertiajs/react'
 import { EditIcon, TrashIcon } from 'lucide-react'
 import { Quote } from '~/types/quote'
 import { SortableDataTableHead } from '~/components/ui/sortable-data-table-head'
+import { formatDate } from '~/lib/utils'
 
 type QuoteDataTableProps = {
   className?: string
@@ -59,7 +60,7 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
         {data.data.map((quote) => (
           <DataTableRow key={quote.id}>
             <DataTableCell>{quote.title}</DataTableCell>
-            <DataTableCell>{quote.date}</DataTableCell>
+            <DataTableCell>{formatDate(quote.date)}</DataTableCell>
             <DataTableCell>{quote.totalPrice} {quote.currency}</DataTableCell>
             <DataTableCell>{quote.company.name}</DataTableCell>
             <DataTableCell>{quote.contact.fullName}</DataTableCell>
