@@ -15,11 +15,14 @@ export class QuoteService {
   }
 
   public getQuotes(): ModelQueryBuilderContract<typeof Quote> {
-    return Quote.query().where('userId', this.user.id)
+    return Quote.query().where('quotes.user_id', this.user.id)
   }
 
   public async getQuote(id: number): Promise<Quote> {
-    return await Quote.query().where('id', id).where('userId', this.user.id).firstOrFail()
+    return await Quote.query()
+      .where('quotes.id', id)
+      .where('quotes.user_id', this.user.id)
+      .firstOrFail()
   }
 
   public async createQuote(quote: Infer<typeof createQuoteValidator>): Promise<Quote> {
