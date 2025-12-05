@@ -154,7 +154,7 @@ export function QuoteItem({
           </FormControl>
         </FormRow>
       </div>
-      <div className={'flex flex-col gap-4 justify-end'}>
+      <div className={'flex flex-col gap-4 justify-center md:justify-end'}>
         <Button type="button" size={'icon'} onClick={onMoveUp} disabled={!canMoveUp}>
           <ArrowUpIcon />
         </Button>
