@@ -1,14 +1,12 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
+import { QuoteStatus } from '#enums/quote_status'
 
 export default class extends BaseSchema {
   protected tableName = 'quotes'
 
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table
-        .enum('status', ['draft', 'sent', 'accepted', 'rejected'])
-        .defaultTo('draft')
-        .notNullable()
+      table.enum('status', Object.values(QuoteStatus)).defaultTo('draft').notNullable()
     })
   }
 
