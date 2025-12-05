@@ -12,6 +12,7 @@
       "title": "titre",
       "date": "date",
       "version": "version",
+      "status": "statut",
       "companyId": "société",
       "contactId": "contact"
     },

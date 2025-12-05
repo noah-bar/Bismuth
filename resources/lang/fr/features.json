@@ -81,6 +81,14 @@
     }
   },
   "quote": {
+    "status": {
+      "draft": "Brouillon",
+      "sent": "Envoyé",
+      "accepted": "Accepté",
+      "rejected": "Refusé",
+      "completed": "Terminé",
+      "closed": "Clôturé"
+    },
     "quote-data-table": {
       "headers": {
         "title": "Titre",
@@ -88,6 +96,7 @@
         "totalPrice": "Montant total",
         "company": "Société",
         "contact": "Contact",
+        "status": "Statut",
         "actions": "Actions"
       }
     },
@@ -111,6 +120,7 @@
         "title": "Titre",
         "version": "Version",
         "date": "Date",
+        "status": "Statut",
         "taxIncluded": "Taxe incluse",
         "currency": "Devise",
         "price": "Prix",
