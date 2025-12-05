@@ -53,7 +53,7 @@ export function ContactForm({ data, onSubmit, ...props }: ContactFormProps) {
       <FormRow>
         <FormControl error={form.errors.firstName}>
           <Label htmlFor={'firstName'}>
-            {t('features.contact.contact-form.fields.first_name')}
+            {t('features.contact.contact-form.fields.firstName')}
           </Label>
           <Input
             type={'text'}
@@ -62,7 +62,7 @@ export function ContactForm({ data, onSubmit, ...props }: ContactFormProps) {
           />
         </FormControl>
         <FormControl error={form.errors.lastName}>
-          <Label htmlFor={'lastName'}>{t('features.contact.contact-form.fields.last_name')}</Label>
+          <Label htmlFor={'lastName'}>{t('features.contact.contact-form.fields.lastName')}</Label>
           <Input
             type={'text'}
             value={form.data.lastName}

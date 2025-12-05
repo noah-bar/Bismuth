@@ -29,7 +29,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
       <div className={'flex flex-col items-center justify-center gap-2 text-center'}>
         <img
           className={'size-12'}
-          alt={t('features.auth.login-form.logo_alt')}
+          alt={t('features.auth.login-form.logoAlt')}
           src={'/web-app-manifest-192x192.png'}
         />
         <h1 className={'text-xl font-semibold'}>{t('features.auth.login-form.title')}</h1>

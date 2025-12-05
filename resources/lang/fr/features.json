@@ -3,9 +3,7 @@
     "login-form": {
       "title": "Connexion à votre compte",
       "subtitle": "Entrez votre email et votre mot de passe ci-dessous pour vous connecter",
-
-      "logo_alt": "Logo Bismuth",
-
+      "logoAlt": "Logo Bismuth",
       "fields": {
         "email": {
           "label": "Adresse email",
@@ -47,7 +45,7 @@
       "fields": {
         "name": "Nom de l'entreprise",
         "address": "Adresse",
-        "postal_code": "Code postal",
+        "postalCode": "Code postal",
         "city": "Ville"
       }
     }
@@ -55,8 +53,9 @@
   "contact": {
     "contact-data-table": {
       "headers": {
-        "first_name": "Prénom",
-        "last_name": "Nom",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "fullName": "Nom",
         "email": "Adresse email",
         "actions": "Actions"
       }
@@ -75,9 +74,49 @@
         "edit": "Modifie le client"
       },
       "fields": {
-        "first_name": "Prénom",
-        "last_name": "Nom",
+        "firstName": "Prénom",
+        "lastName": "Nom",
         "email": "Adresse email"
+      }
+    }
+  },
+  "quote": {
+    "quote-data-table": {
+      "headers": {
+        "title": "Titre",
+        "date": "Date",
+        "totalPrice": "Montant total",
+        "company": "Société",
+        "contact": "Contact",
+        "actions": "Actions"
+      }
+    },
+    "quote-menubar": {
+      "file": {
+        "title": "Fichier",
+        "items": {
+          "new": "Nouveau"
+        }
+      }
+    },
+    "quote-form": {
+      "title": {
+        "create": "Créer un nouveau devis",
+        "edit": "Modifier le devis"
+      },
+      "buttons": {
+        "add": "Ajouter"
+      },
+      "fields": {
+        "title": "Titre",
+        "version": "Version",
+        "date": "Date",
+        "taxIncluded": "Taxe incluse",
+        "currency": "Devise",
+        "price": "Prix",
+        "description": "Description",
+        "company": "Société",
+        "contact": "Contact"
       }
     }
   }

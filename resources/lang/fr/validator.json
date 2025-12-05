@@ -8,7 +8,12 @@
       "name": "nom",
       "postalCode": "code postal",
       "firstName": "prénom",
-      "lastName": "nom"
+      "lastName": "nom",
+      "title": "titre",
+      "date": "date",
+      "version": "version",
+      "companyId": "société",
+      "contactId": "contact"
     },
     "messages": {
       "required": "Le champ {field} doit être défini.",

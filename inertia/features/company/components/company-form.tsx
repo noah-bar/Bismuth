@@ -71,7 +71,7 @@ export function CompanyForm({ data, onSubmit, ...props }: CompanyFormProps) {
         </FormControl>
         <FormControl error={form.errors.postalCode}>
           <Label htmlFor={'postal_code'}>
-            {t('features.company.company-form.fields.postal_code')}
+            {t('features.company.company-form.fields.postalCode')}
           </Label>
           <Input
             type={'text'}
