@@ -8,8 +8,18 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Company from '#models/company'
 import Contact from '#models/contact'
 
-const Searchable = withSearchable(['title', 'date', 'totalPrice'])
-const Sortable = withSortable(['title', 'date', 'totalPrice'], 'title', 'asc')
+const Searchable = withSearchable([
+  'title',
+  'date',
+  'totalPrice',
+  'company.name',
+  'contact.fullName',
+])
+const Sortable = withSortable(
+  ['title', 'date', 'totalPrice', 'company.name', 'contact.fullName'],
+  'title',
+  'asc'
+)
 
 export default class Quote extends compose(BaseModel, Searchable, Sortable) {
   @column({ isPrimary: true })
