@@ -17,7 +17,7 @@ const Searchable = withSearchable([
   'contact.fullName',
 ])
 const Sortable = withSortable(
-  ['title', 'date', 'totalPrice', 'company.name', 'contact.fullName'],
+  ['title', 'date', 'totalPrice', 'status', 'company.name', 'contact.fullName'],
   'title',
   'asc'
 )
