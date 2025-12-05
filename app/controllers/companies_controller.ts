@@ -1,12 +1,17 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import Company from '#models/company'
 import { createCompanyValidator, updateCompanyValidator } from '#validators/company_validator'
+import { inject } from '@adonisjs/core'
+import { CompanyService } from '#services/company_service'
 
+@inject()
 export default class CompaniesController {
+  constructor(private service: CompanyService) {}
+
   public async index({ inertia, request }: HttpContext) {
     const { page, q, sort, direction } = request.qs()
 
-    const companies = await Company.query()
+    const companies = await this.service
+      .getCompanies()
       .apply((scopes) => scopes.search(q))
       .apply((scopes) => scopes.sortBy(sort, direction))
       .paginate(page || 1, 100)
@@ -25,13 +30,13 @@ export default class CompaniesController {
 
   public async store({ request, response }: HttpContext) {
     const payload = await request.validateUsing(createCompanyValidator)
-    await Company.create(payload)
+    await this.service.createCompany(payload)
 
     return response.redirect().toRoute('companies.index')
   }
 
   public async edit({ inertia, params }: HttpContext) {
-    const company = await Company.findOrFail(params.id)
+    const company = await this.service.getCompany(params.id)
 
     return inertia.render('companies/edit', {
       company: company.serialize(),
@@ -39,16 +44,15 @@ export default class CompaniesController {
   }
 
   public async update({ params, request, response }: HttpContext) {
-    const company = await Company.findOrFail(params.id)
+    const company = await this.service.getCompany(params.id)
     const payload = await request.validateUsing(updateCompanyValidator)
-    await company.merge(payload).save()
+    await this.service.updateCompany(company.id, payload)
 
     return response.redirect().toRoute('companies.edit', { id: company.id })
   }
 
   public async destroy({ params, response }: HttpContext) {
-    const company = await Company.findOrFail(params.id)
-    await company.delete()
+    await this.service.deleteCompany(params.id)
     return response.redirect().toRoute('companies.index')
   }
 }
