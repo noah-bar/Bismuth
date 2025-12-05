@@ -1,0 +1,87 @@
+import type { HttpContext } from '@adonisjs/core/http'
+import { inject } from '@adonisjs/core'
+import { QuoteService } from '#services/quote_service'
+import { createQuoteValidator, updateQuoteValidator } from '#validators/quote_validator'
+import { CompanyService } from '#services/company_service'
+import { ContactService } from '#services/contact_service'
+import Quote from '#models/quote'
+import { DateTime } from 'luxon'
+
+@inject()
+export default class QuotesController {
+  constructor(
+    private service: QuoteService,
+    private companyService: CompanyService,
+    private contactService: ContactService
+  ) {}
+
+  public async index({ inertia, request }: HttpContext) {
+    const { page, q, sort, direction } = request.qs()
+
+    const quotes = await this.service
+      .getQuotes()
+      .preload('contact')
+      .preload('company')
+      .apply((scopes) => scopes.search(q))
+      .apply((scopes) => scopes.sortBy(sort, direction))
+      .paginate(page || 1, 100)
+
+    return inertia.render('quotes/index', {
+      quotes: quotes.serialize(),
+      q,
+      sort,
+      direction,
+    })
+  }
+
+  public async show({ inertia, params }: HttpContext) {
+    const quote = await this.service.getQuote(params.id)
+
+    return inertia.render('quotes/show', {
+      quote,
+    })
+  }
+
+  public async create({ inertia }: HttpContext) {
+    const companies = await this.companyService.getCompanies().select('id', 'name')
+    console.log(companies)
+    const contacts = await this.contactService.getContacts().select('id', 'fullName')
+    const quote = new Quote().fill({
+      currency: 'CHF',
+      taxIncluded: false,
+      date: DateTime.local(),
+    })
+
+    return inertia.render('quotes/create', {
+      companies: companies.map((company) => company.serialize()),
+      contacts: contacts.map((contact) => contact.serialize()),
+      quote: quote.serialize(),
+    })
+  }
+
+  public async store({ response, request }: HttpContext) {
+    const payload = await request.validateUsing(createQuoteValidator)
+    await this.service.createQuote(payload)
+    return response.redirect().toRoute('quotes.index')
+  }
+
+  public async edit({ inertia, params }: HttpContext) {
+    const companies = await this.companyService.getCompanies().select('id', 'name')
+    const contacts = await this.contactService.getContacts().select('id', 'fullName')
+
+    const quote = await this.service.getQuote(params.id)
+
+    return inertia.render('quotes/edit', {
+      quote: quote.serialize(),
+      companies: companies.map((company) => company.serialize()),
+      contacts: contacts.map((contact) => contact.serialize()),
+    })
+  }
+
+  public async update({ response, request, params }: HttpContext) {
+    const payload = await request.validateUsing(updateQuoteValidator)
+    const quote = await this.service.updateQuote(params.id, payload)
+
+    return response.redirect().toRoute('quotes.edit', { id: quote.id })
+  }
+}
