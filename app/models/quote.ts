@@ -7,6 +7,7 @@ import User from '#models/user'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Company from '#models/company'
 import Contact from '#models/contact'
+import { QuoteStatus } from '#enums/quote_status'
 
 const Searchable = withSearchable([
   'title',
@@ -36,6 +37,9 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
 
   @column()
   declare currency: 'CHF' | 'EUR' | 'USD'
+
+  @column()
+  declare status: QuoteStatus
 
   @column()
   declare taxIncluded: boolean

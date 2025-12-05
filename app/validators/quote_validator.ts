@@ -1,5 +1,6 @@
 import vine from '@vinejs/vine'
 import { DateTime } from 'luxon'
+import { QuoteStatus } from '#enums/quote_status'
 
 export const createQuoteValidator = vine.compile(
   vine.object({
@@ -7,6 +8,7 @@ export const createQuoteValidator = vine.compile(
     date: vine.date().transform((value) => DateTime.fromJSDate(value)),
     version: vine.number().positive().withoutDecimals(),
     currency: vine.enum(['CHF', 'EUR', 'USD']),
+    status: vine.enum(Object.values(QuoteStatus)),
     taxIncluded: vine.boolean(),
     companyId: vine
       .number()
@@ -44,6 +46,7 @@ export const updateQuoteValidator = vine.compile(
       .optional(),
     version: vine.number().positive().withoutDecimals().optional(),
     currency: vine.enum(['CHF', 'EUR', 'USD']).optional(),
+    status: vine.enum(Object.values(QuoteStatus)).optional(),
     taxIncluded: vine.boolean().optional(),
     companyId: vine
       .number()

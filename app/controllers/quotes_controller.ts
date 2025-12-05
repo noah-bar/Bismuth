@@ -6,6 +6,7 @@ import { CompanyService } from '#services/company_service'
 import { ContactService } from '#services/contact_service'
 import Quote from '#models/quote'
 import { DateTime } from 'luxon'
+import { QuoteStatus } from '#enums/quote_status'
 
 @inject()
 export default class QuotesController {
@@ -48,6 +49,7 @@ export default class QuotesController {
     const contacts = await this.contactService.getContacts().select('id', 'fullName')
     const quote = new Quote().fill({
       currency: 'CHF',
+      status: QuoteStatus.DRAFT,
       taxIncluded: false,
       date: DateTime.local(),
     })
@@ -56,6 +58,7 @@ export default class QuotesController {
       companies: companies.map((company) => company.serialize()),
       contacts: contacts.map((contact) => contact.serialize()),
       quote: quote.serialize(),
+      statuses: Object.values(QuoteStatus),
     })
   }
 
@@ -75,6 +78,7 @@ export default class QuotesController {
       quote: quote.serialize(),
       companies: companies.map((company) => company.serialize()),
       contacts: contacts.map((contact) => contact.serialize()),
+      statuses: Object.values(QuoteStatus),
     })
   }
 
