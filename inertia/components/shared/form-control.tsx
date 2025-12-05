@@ -8,8 +8,8 @@ type FormControlProps = HTMLAttributes<HTMLInputElement> & {
 export function FormControl({ children, className, error, ...props }: FormControlProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)} {...props}>
-      {error && <p className={'text-sm text-destructive'}>{error}</p>}
       {children}
+      {error && <p className={'text-sm text-destructive'}>{error}</p>}
     </div>
   )
 }
