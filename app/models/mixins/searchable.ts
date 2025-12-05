@@ -10,10 +10,24 @@ export function withSearchable(searchableColumns: string[]) {
 
         query.where((builder: any) => {
           searchableColumns.forEach((column, index) => {
-            if (index === 0) {
-              builder.where(column, 'LIKE', `%${term}%`)
+            if (column.includes('.')) {
+              const [relation, relatedColumn] = column.split('.')
+
+              if (index === 0) {
+                builder.whereHas(relation, (relatedQuery: any) => {
+                  relatedQuery.where(relatedColumn, 'LIKE', `%${term}%`)
+                })
+              } else {
+                builder.orWhereHas(relation, (relatedQuery: any) => {
+                  relatedQuery.where(relatedColumn, 'LIKE', `%${term}%`)
+                })
+              }
             } else {
-              builder.orWhere(column, 'LIKE', `%${term}%`)
+              if (index === 0) {
+                builder.where(column, 'LIKE', `%${term}%`)
+              } else {
+                builder.orWhere(column, 'LIKE', `%${term}%`)
+              }
             }
           })
         })
