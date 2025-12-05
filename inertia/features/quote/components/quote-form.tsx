@@ -14,6 +14,7 @@ import { Contact } from '~/types/contact'
 import { NativeSelect, NativeSelectOption } from '~/components/ui/native-select'
 import { QuoteItems } from '~/features/quote/components/quote-items'
 import { Switch } from '~/components/ui/switch'
+import { Separator } from '~/components/ui/separator'
 
 type QuoteFormProps = FormHTMLAttributes<HTMLFormElement> & {
   data: CreateQuote | UpdateQuote
@@ -32,7 +33,7 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
     ? t('features.quote.quote-form.title.edit')
     : t('features.quote.quote-form.title.create')
 
-  const totalPrice = form.data.items?.reduce((acc, item) => (acc += item.price), 0)
+  const totalPrice = form.data.items?.reduce((acc, item) => (acc += item.price), 0) || 0
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -56,7 +57,7 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
       header={<h1 className={'text-xl font-semibold'}>{formTitle}</h1>}
       footer={
         <div className={'flex size-full items-center justify-between'}>
-          <BackButton isDirty={form.isDirty} />({totalPrice} {form.data.currency})
+          <BackButton isDirty={form.isDirty} />
           <SubmitButton isProcessing={form.processing} disabled={!form.isDirty} />
         </div>
       }
@@ -148,7 +149,10 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
             ))}
           </NativeSelect>
         </FormControl>
-        <FormControl className={"flex-col-reverse md:flex-row md:justify-center md:items-center"} error={form.errors.taxIncluded}>
+        <FormControl
+          className={'flex-col-reverse md:flex-row md:justify-center md:items-center'}
+          error={form.errors.taxIncluded}
+        >
           <Switch
             id={'taxIncluded'}
             checked={form.data.taxIncluded}
@@ -157,7 +161,12 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
           <Label htmlFor={'taxIncluded'}>{t('features.quote.quote-form.fields.taxIncluded')}</Label>
         </FormControl>
       </FormRow>
-      <span>Elements</span>
+      <div className="flex items-center flex-row gap-4">
+        <div className="font-semibold whitespace-nowrap">
+          {t('features.quote.quote-form.elements')} ({form.data.items?.length || 0}) ({t('features.quote.quote-form.total')} {totalPrice} {form.data.currency})
+        </div>
+        <Separator className="flex-1" />
+      </div>
       <QuoteItems
         value={form.data.items || []}
         onChange={(e) => form.setData('items', e)}

@@ -73,7 +73,7 @@ export function QuoteItems({ value, onChange, errors }: QuoteItemsProps) {
   const sortedItems = [...value].sort((a, b) => a.order - b.order)
 
   return (
-    <>
+    <div className={"flex flex-col gap-8"}>
       {sortedItems.map((item, index) => (
         <QuoteItem
           key={index}
@@ -94,7 +94,7 @@ export function QuoteItems({ value, onChange, errors }: QuoteItemsProps) {
           {t('features.quote.quote-form.buttons.add')}
         </Button>
       </div>
-    </>
+    </div>
   )
 }
 

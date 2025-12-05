@@ -116,6 +116,8 @@
       "buttons": {
         "add": "Ajouter"
       },
+      "total": "Total",
+      "elements": "Élements",
       "fields": {
         "title": "Titre",
         "version": "Version",
