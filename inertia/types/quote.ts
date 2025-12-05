@@ -1,6 +1,15 @@
 import { Company } from '~/types/company'
 import { Contact } from '~/types/contact'
 
+export enum QuoteStatus {
+  DRAFT = 'draft',
+  SENT = 'sent',
+  ACCEPTED = 'accepted',
+  REJECTED = 'rejected',
+  COMPLETED = 'completed',
+  CLOSED = 'closed',
+}
+
 export type QuoteItem = {
   title: string
   description?: string
@@ -13,6 +22,7 @@ export type Quote = {
   title: string
   date: string
   currency: 'CHF' | 'EUR' | 'USD'
+  status: QuoteStatus
   companyId: number
   company: Company
   contactId: number

@@ -1,10 +1,10 @@
-import { Form } from '@/components/shared/form'
-import { SubmitButton } from '@/components/shared/submit-button'
-import { useI18n } from '@/hooks/use-i18n'
+import { Form } from '~/components/shared/form'
+import { SubmitButton } from '~/components/shared/submit-button'
+import { useI18n } from '~/hooks/use-i18n'
 import { useForm, usePage } from '@inertiajs/react'
 import { FormEvent, FormHTMLAttributes } from 'react'
-import { BackButton } from '@/components/shared/back-button'
-import { CreateQuote, UpdateQuote } from '~/types/quote'
+import { BackButton } from '~/components/shared/back-button'
+import { CreateQuote, QuoteStatus, UpdateQuote } from '~/types/quote'
 import { FormRow } from '~/components/shared/form-row'
 import { FormControl } from '~/components/shared/form-control'
 import { Label } from '~/components/ui/label'
@@ -20,7 +20,11 @@ type QuoteFormProps = FormHTMLAttributes<HTMLFormElement> & {
 }
 export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
   const { t } = useI18n()
-  const { companies, contacts } = usePage<{ companies: Company[]; contacts: Contact[] }>().props
+  const { companies, contacts, statuses } = usePage<{
+    companies: Company[]
+    contacts: Contact[]
+    statuses: QuoteStatus[]
+  }>().props
   const form = useForm<CreateQuote | UpdateQuote>(data)
   const id = 'id' in form.data ? form.data.id : undefined
   const editMode = !!id
@@ -28,7 +32,7 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
     ? t('features.quote.quote-form.title.edit')
     : t('features.quote.quote-form.title.create')
 
-  const totalPrice = form.data.items?.reduce((acc, item) => acc += item.price, 0)
+  const totalPrice = form.data.items?.reduce((acc, item) => (acc += item.price), 0)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -52,8 +56,7 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
       header={<h1 className={'text-xl font-semibold'}>{formTitle}</h1>}
       footer={
         <div className={'flex size-full items-center justify-between'}>
-          <BackButton isDirty={form.isDirty} />
-          ({totalPrice} {form.data.currency})
+          <BackButton isDirty={form.isDirty} />({totalPrice} {form.data.currency})
           <SubmitButton isProcessing={form.processing} disabled={!form.isDirty} />
         </div>
       }
@@ -138,6 +141,19 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
             <NativeSelectOption value={'CHF'}>CHF</NativeSelectOption>
             <NativeSelectOption value={'EUR'}>EUR</NativeSelectOption>
             <NativeSelectOption value={'USD'}>USD</NativeSelectOption>
+          </NativeSelect>
+        </FormControl>
+        <FormControl error={form.errors.status}>
+          <Label htmlFor={'status'}>{t('features.quote.quote-form.fields.status')}</Label>
+          <NativeSelect
+            value={form.data.status}
+            onChange={(e) => form.setData('status', e.target.value as QuoteStatus)}
+          >
+            {statuses.map((status) => (
+              <NativeSelectOption key={status} value={status}>
+                {t(`features.quote.status.${status}`)}
+              </NativeSelectOption>
+            ))}
           </NativeSelect>
         </FormControl>
       </FormRow>

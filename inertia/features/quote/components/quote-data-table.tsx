@@ -53,6 +53,9 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
           <SortableDataTableHead sortKey={'contact.fullName'}>
             {t('features.quote.quote-data-table.headers.contact')}
           </SortableDataTableHead>
+          <SortableDataTableHead sortKey={'status'}>
+            {t('features.quote.quote-data-table.headers.status')}
+          </SortableDataTableHead>
           <DataTableHead>{t('features.quote.quote-data-table.headers.actions')}</DataTableHead>
         </DataTableRow>
       </DataTableHeader>
@@ -61,9 +64,12 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
           <DataTableRow key={quote.id}>
             <DataTableCell>{quote.title}</DataTableCell>
             <DataTableCell>{formatDate(quote.date)}</DataTableCell>
-            <DataTableCell>{quote.totalPrice} {quote.currency}</DataTableCell>
+            <DataTableCell>
+              {quote.totalPrice} {quote.currency}
+            </DataTableCell>
             <DataTableCell>{quote.company.name}</DataTableCell>
             <DataTableCell>{quote.contact.fullName}</DataTableCell>
+            <DataTableCell>{t(`features.quote.status.${quote.status}`)}</DataTableCell>
             <DataTableCell>
               <div className={'flex gap-2 w-full justify-center items-center'}>
                 <Button size={'icon'} variant={'ghost'} onClick={() => handleDelete(quote.id)}>
