@@ -124,14 +124,6 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
         </FormControl>
       </FormRow>
       <FormRow>
-        <FormControl error={form.errors.taxIncluded}>
-          <Label htmlFor={'taxIncluded'}>{t('features.quote.quote-form.fields.taxIncluded')}</Label>
-          <Switch
-            id={'taxIncluded'}
-            checked={form.data.taxIncluded}
-            onCheckedChange={(e) => form.setData('taxIncluded', e)}
-          />
-        </FormControl>
         <FormControl error={form.errors.currency}>
           <Label htmlFor={'currency'}>{t('features.quote.quote-form.fields.currency')}</Label>
           <NativeSelect
@@ -155,6 +147,14 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
               </NativeSelectOption>
             ))}
           </NativeSelect>
+        </FormControl>
+        <FormControl className={"flex-col-reverse md:flex-row md:justify-center md:items-center"} error={form.errors.taxIncluded}>
+          <Switch
+            id={'taxIncluded'}
+            checked={form.data.taxIncluded}
+            onCheckedChange={(e) => form.setData('taxIncluded', e)}
+          />
+          <Label htmlFor={'taxIncluded'}>{t('features.quote.quote-form.fields.taxIncluded')}</Label>
         </FormControl>
       </FormRow>
       <span>Elements</span>
