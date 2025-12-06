@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, belongsTo, column } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeSave, belongsTo, column, scope } from '@adonisjs/lucid/orm'
 import { withSearchable } from '#models/mixins/searchable'
 import { withSortable } from '#models/mixins/sortable'
 import { compose } from '@adonisjs/core/helpers'
@@ -89,4 +89,17 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
       quote.totalPrice = quote.items.reduce((sum, item) => sum + (item.price || 0), 0)
     }
   }
+
+  public static filterByStatus = scope((query, status?: QuoteStatus) => {
+    if (!status) {
+      return query.whereIn('status', [
+        QuoteStatus.DRAFT,
+        QuoteStatus.SENT,
+        QuoteStatus.ACCEPTED,
+        QuoteStatus.COMPLETED,
+      ])
+    }
+
+    return query.where('status', status)
+  })
 }

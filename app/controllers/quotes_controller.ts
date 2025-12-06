@@ -1,7 +1,11 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { inject } from '@adonisjs/core'
 import { QuoteService } from '#services/quote_service'
-import { createQuoteValidator, updateQuoteValidator } from '#validators/quote_validator'
+import {
+  createQuoteValidator,
+  updateQuoteValidator,
+  quoteQueryValidator,
+} from '#validators/quote_validator'
 import { CompanyService } from '#services/company_service'
 import { ContactService } from '#services/contact_service'
 import Quote from '#models/quote'
@@ -17,7 +21,7 @@ export default class QuotesController {
   ) {}
 
   public async index({ inertia, request }: HttpContext) {
-    const { page, q, sort, direction } = request.qs()
+    const { page, q, sort, direction, status } = await request.validateUsing(quoteQueryValidator)
 
     const quotes = await this.service
       .getQuotes()
@@ -25,10 +29,12 @@ export default class QuotesController {
       .preload('company')
       .apply((scopes) => scopes.search(q))
       .apply((scopes) => scopes.sortBy(sort, direction))
+      .apply((scopes) => scopes.filterByStatus(status))
       .paginate(page || 1, 100)
 
     return inertia.render('quotes/index', {
       quotes: quotes.serialize(),
+      statuses: Object.values(QuoteStatus),
       q,
       sort,
       direction,
@@ -45,7 +51,6 @@ export default class QuotesController {
 
   public async create({ inertia }: HttpContext) {
     const companies = await this.companyService.getCompanies().select('id', 'name')
-    console.log(companies)
     const contacts = await this.contactService.getContacts().select('id', 'fullName')
     const quote = new Quote().fill({
       currency: 'CHF',

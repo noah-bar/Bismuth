@@ -78,3 +78,13 @@ export const updateQuoteValidator = vine.compile(
       .optional(),
   })
 )
+
+export const quoteQueryValidator = vine.compile(
+  vine.object({
+    page: vine.number().positive().withoutDecimals().optional(),
+    q: vine.string().trim().optional(),
+    sort: vine.string().trim().optional(),
+    direction: vine.enum(['asc', 'desc']).optional(),
+    status: vine.enum(Object.values(QuoteStatus)).optional(),
+  })
+)

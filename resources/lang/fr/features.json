@@ -100,6 +100,9 @@
         "actions": "Actions"
       }
     },
+    "quote-status-filter-select": {
+      "placeholder": "Statut"
+    },
     "quote-menubar": {
       "file": {
         "title": "Fichier",
