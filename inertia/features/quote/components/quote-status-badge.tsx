@@ -16,7 +16,7 @@ type QuoteStatusBadgeProps = {
 export function QuoteStatusBadge({ status }: QuoteStatusBadgeProps) {
   const { t } = useI18n()
   const text = t(`features.quote.status.${status}`)
-  console.log(status)
+
   switch (status) {
     case QuoteStatus.DRAFT:
       return (
