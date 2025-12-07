@@ -114,7 +114,8 @@
       "file": {
         "title": "Fichier",
         "items": {
-          "new": "Nouveau"
+          "new": "Nouveau",
+          "edit": "Modifier"
         }
       }
     },
