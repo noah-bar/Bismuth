@@ -19,10 +19,10 @@ export function QuoteTabs({ className, quote }: QuoteTabsProps) {
           <TabsTrigger value="order">{t('features.quote.quote-tabs.tabs.order')}</TabsTrigger>
           <TabsTrigger value="invoice">{t('features.quote.quote-tabs.tabs.invoice')}</TabsTrigger>
         </TabsList>
-        <TabsContent value={'offer'} className="flex-1 mt-4">
+        <TabsContent value={'offer'} className="flex-1 flex justify-center">
           <iframe
             src={`/quotes/${quote.id}/offer`}
-            className="w-full h-full border-0 rounded p-4 bg-white"
+            className="w-full max-w-[794px] h-full border rounded p-4 bg-white"
             title="Aperçu du devis"
           />
         </TabsContent>
