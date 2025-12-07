@@ -11,13 +11,15 @@ import { ContactService } from '#services/contact_service'
 import Quote from '#models/quote'
 import { DateTime } from 'luxon'
 import { QuoteStatus } from '#enums/quote_status'
+import { PdfService } from '#services/pdf_service'
 
 @inject()
 export default class QuotesController {
   constructor(
     private service: QuoteService,
     private companyService: CompanyService,
-    private contactService: ContactService
+    private contactService: ContactService,
+    private pdfService: PdfService
   ) {}
 
   public async index({ inertia, request }: HttpContext) {
@@ -93,5 +95,27 @@ export default class QuotesController {
     const quote = await this.service.updateQuote(params.id, payload)
 
     return response.redirect().toRoute('quotes.edit', { id: quote.id })
+  }
+
+  public async offer({ params, view, request, response }: HttpContext) {
+    const quote = await this.service.getQuote(params.id)
+    await quote.load('company')
+    await quote.load('contact')
+
+    const html = await view.render('pdf/quote', { quote })
+
+    switch (request.accepts(['html', 'pdf'])) {
+      case 'pdf':
+        const pdfBuffer = await this.pdfService.generatePdfFromHtml(html)
+        const filename = `devis-${quote.id}-v${quote.version}.pdf`
+
+        response.header('Content-Type', 'application/pdf')
+        response.header('Content-Disposition', `attachment; filename="${filename}"`)
+
+        return response.send(pdfBuffer)
+      default:
+        response.header('Content-Type', 'text/html')
+        return html
+    }
   }
 }
