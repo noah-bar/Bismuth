@@ -8,6 +8,7 @@ import {
   Pagination,
 } from '@/components/ui/pagination'
 import { Paginated } from '@/types/paginated'
+import { usePage } from '@inertiajs/react'
 
 type PaginationProps = {
   data: Paginated<unknown>
@@ -16,6 +17,7 @@ type PaginationProps = {
 
 export function DataTablePagination({ data, maxPages = 5 }: PaginationProps) {
   const { currentPage, lastPage, previousPageUrl, nextPageUrl } = data.meta
+  const { url } = usePage()
 
   const getVisiblePages = () => {
     if (lastPage <= maxPages) {
@@ -58,11 +60,9 @@ export function DataTablePagination({ data, maxPages = 5 }: PaginationProps) {
   const visiblePages = getVisiblePages()
 
   const getPageUrl = (page: number) => {
-    if (typeof window === 'undefined') return '#'
-
-    const url = new URL(window.location.href)
-    url.searchParams.set('page', page.toString())
-    return url.pathname + url.search
+    const currentUrl = new URL(url, 'http://localhost')
+    currentUrl.searchParams.set('page', page.toString())
+    return currentUrl.pathname + currentUrl.search
   }
 
   return (
