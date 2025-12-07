@@ -16,6 +16,7 @@ import { Quote } from '~/types/quote'
 import { SortableDataTableHead } from '~/components/ui/sortable-data-table-head'
 import { formatDate } from '~/lib/utils'
 import { QuoteStatusBadge } from './quote-status-badge'
+import type { MouseEvent } from 'react'
 
 type QuoteDataTableProps = {
   className?: string
@@ -26,7 +27,8 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
   const { t } = useI18n()
   const { confirm } = useConfirm()
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (e: MouseEvent<HTMLButtonElement>, id: number) => {
+    e.stopPropagation()
     if (await confirm()) {
       router.delete(`/quotes/${id}`, {
         preserveState: true,
@@ -75,16 +77,21 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
             <DataTableCell>{quote.company.name}</DataTableCell>
             <DataTableCell>{quote.contact.fullName}</DataTableCell>
             <DataTableCell>
-              <div className={"w-full flex justify-center items-center"}>
+              <div className={'w-full flex justify-center items-center'}>
                 {<QuoteStatusBadge status={quote.status} />}
               </div>
             </DataTableCell>
             <DataTableCell>
               <div className={'flex gap-2 w-full justify-center items-center'}>
-                <Button size={'icon'} variant={'ghost'} onClick={() => handleDelete(quote.id)}>
+                <Button size={'icon'} variant={'ghost'} onClick={(e) => handleDelete(e, quote.id)}>
                   <TrashIcon />
                 </Button>
-                <Button size={'icon'} variant={'ghost'} asChild>
+                <Button
+                  size={'icon'}
+                  variant={'ghost'}
+                  asChild
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <Link href={`/quotes/${quote.id}/edit`}>
                     <EditIcon />
                   </Link>
