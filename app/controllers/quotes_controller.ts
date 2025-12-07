@@ -107,10 +107,9 @@ export default class QuotesController {
     switch (request.accepts(['html', 'pdf'])) {
       case 'pdf':
         const pdfBuffer = await this.pdfService.generatePdfFromHtml(html)
-        const filename = `devis-${quote.id}-v${quote.version}.pdf`
 
         response.header('Content-Type', 'application/pdf')
-        response.header('Content-Disposition', `attachment; filename="${filename}"`)
+        response.header('Content-Disposition', `attachment;"`)
 
         return response.send(pdfBuffer)
       default:
