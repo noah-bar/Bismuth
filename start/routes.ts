@@ -23,6 +23,7 @@ router
 
 router
   .group(() => {
+    router.get('/', ({ response }) => response.redirect().toRoute('quotes.index'))
     router.resource('companies', CompaniesController)
     router.resource('contacts', ContactsController)
     router.resource('quotes', QuotesController)
