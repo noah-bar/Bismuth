@@ -26,6 +26,7 @@ router
     router.get('/', ({ response }) => response.redirect().toRoute('quotes.index'))
     router.resource('companies', CompaniesController)
     router.resource('contacts', ContactsController)
+    router.get('/quotes/:id/offer', [QuotesController, 'offer']).as('quotes.offer')
     router.resource('quotes', QuotesController)
     router.delete('/logout', [SessionController, 'destroy']).as('session.destroy')
   })
