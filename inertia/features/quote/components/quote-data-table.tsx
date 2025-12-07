@@ -35,6 +35,10 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
     }
   }
 
+  const handleClick = (quote: Quote) => {
+    router.visit(`/quotes/${quote.id}`)
+  }
+
   return (
     <DataTable data={data} className={className}>
       <DataTableHeader>
@@ -62,7 +66,7 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
       </DataTableHeader>
       <DataTableBody>
         {data.data.map((quote) => (
-          <DataTableRow key={quote.id}>
+          <DataTableRow key={quote.id} onClick={() => handleClick(quote)}>
             <DataTableCell>{quote.title}</DataTableCell>
             <DataTableCell>{formatDate(quote.date)}</DataTableCell>
             <DataTableCell>
