@@ -44,7 +44,7 @@ export function ContactForm({ data, onSubmit, ...props }: ContactFormProps) {
       header={<h1 className={'text-xl font-semibold'}>{formTitle}</h1>}
       footer={
         <div className={'flex size-full justify-between'}>
-          <BackButton isDirty={form.isDirty} />
+          <BackButton url={"/contacts"} isDirty={form.isDirty} />
           <SubmitButton isProcessing={form.processing} disabled={!form.isDirty} />
         </div>
       }

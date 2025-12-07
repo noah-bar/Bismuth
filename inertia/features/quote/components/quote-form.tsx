@@ -57,7 +57,7 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
       header={<h1 className={'text-xl font-semibold'}>{formTitle}</h1>}
       footer={
         <div className={'flex size-full items-center justify-between'}>
-          <BackButton isDirty={form.isDirty} />
+          <BackButton url={'/quotes'} isDirty={form.isDirty} />
           <SubmitButton isProcessing={form.processing} disabled={!form.isDirty} />
         </div>
       }
@@ -163,7 +163,8 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
       </FormRow>
       <div className="flex items-center flex-row gap-4">
         <div className="font-semibold whitespace-nowrap">
-          {t('features.quote.quote-form.elements')} ({form.data.items?.length || 0}) ({t('features.quote.quote-form.total')} {totalPrice} {form.data.currency})
+          {t('features.quote.quote-form.elements')} ({form.data.items?.length || 0}) (
+          {t('features.quote.quote-form.total')} {totalPrice} {form.data.currency})
         </div>
         <Separator className="flex-1" />
       </div>
