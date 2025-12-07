@@ -18,6 +18,8 @@ export function QuoteTabs({ className }: QuoteTabsProps) {
           <TabsTrigger value="invoice">{t('features.quote.quote-tabs.tabs.invoice')}</TabsTrigger>
         </TabsList>
         <TabsContent value={'offer'}></TabsContent>
+        <TabsContent value={'order'}></TabsContent>
+        <TabsContent value={'invoice'}></TabsContent>
       </Tabs>
     </Box>
   )
