@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devis - {{ quote.title }}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      color: #1a1a1a;
+      background-color: white;
+      line-height: 1.6;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #2563eb;
+    }
+
+    .company-info {
+      flex: 1;
+    }
+
+    .company-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+
+    .document-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-align: right;
+    }
+
+    .document-meta {
+      text-align: right;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    .client-section {
+      background: #f9fafb;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .client-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #6b7280;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .client-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+    }
+
+    .items-table thead {
+      background: #f3f4f6;
+    }
+
+    .items-table th {
+      text-align: left;
+      padding: 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #6b7280;
+      font-weight: 600;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .items-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .item-title {
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .item-description {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .price-cell {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .total-section {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .total-box {
+      background: #2563eb;
+      color: white;
+      padding: 20px 30px;
+      border-radius: 8px;
+      min-width: 300px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .total-row.final {
+      font-size: 20px;
+      font-weight: 700;
+      padding-top: 12px;
+      border-top: 2px solid rgba(255, 255, 255, 0.3);
+      margin-top: 8px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-draft {
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+
+    .status-sent {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .status-accepted {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status-completed {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="company-info">
+      <div class="company-name">Votre Entreprise</div>
+      <div>Adresse de l'entreprise</div>
+      <div>Code postal, Ville</div>
+      <div>info@entreprise.ch</div>
+    </div>
+    <div>
+      <div class="document-title">DEVIS</div>
+      <div class="document-meta">
+        <div>N° {{ quote.id }}-v{{ quote.version }}</div>
+        <div>{{ quote.date.setLocale('fr').toFormat('dd MMMM yyyy') }}</div>
+        <div><span class="status-badge status-{{ quote.status.toLowerCase() }}">{{ quote.status }}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="client-section">
+    <div class="client-label">Client</div>
+    <div class="client-name">{{ quote.company.name }}</div>
+    <div>{{ quote.contact.fullName }}</div>
+  </div>
+
+  <h2 style="margin-bottom: 20px;">{{ quote.title }}</h2>
+
+  <table class="items-table">
+    <thead>
+      <tr>
+        <th style="width: 70%">Description</th>
+        <th style="width: 30%; text-align: right;">Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if(quote.items && quote.items.length > 0)
+        @each(item in quote.items)
+          <tr>
+            <td>
+              <div class="item-title">{{ item.title || '' }}</div>
+              @if(item.description)
+                <div class="item-description">{{ item.description }}</div>
+              @end
+            </td>
+            <td class="price-cell">{{ (item.price || 0).toFixed(2) }} {{ quote.currency }}</td>
+          </tr>
+        @end
+      @else
+        <tr>
+          <td colspan="2" style="text-align: center; padding: 20px; color: #6b7280;">
+            Aucun élément
+          </td>
+        </tr>
+      @end
+    </tbody>
+  </table>
+
+  <div class="total-section">
+    <div class="total-box">
+      <div class="total-row">
+        <span>Sous-total</span>
+        <span>{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</span>
+      </div>
+      @if(quote.taxIncluded)
+        <div class="total-row">
+          <span>TVA incluse (7.7%)</span>
+          <span>{{ (quote.totalPrice * 0.077).toFixed(2) }} {{ quote.currency }}</span>
+        </div>
+      @end
+      <div class="total-row final">
+        <span>Total {{ quote.taxIncluded ? 'TTC' : 'HT' }}</span>
+        <span>{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Merci de votre confiance. Ce devis est valable 30 jours.</p>
+    <p style="margin-top: 8px;">Entreprise • Rue • Code postal, Ville • Tél. • Email</p>
+  </div>
+</body>
+</html>
