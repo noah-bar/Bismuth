@@ -57,6 +57,7 @@ export default class QuotesController {
       status: QuoteStatus.DRAFT,
       taxIncluded: false,
       date: DateTime.local(),
+      version: 1,
     })
 
     return inertia.render('quotes/create', {
