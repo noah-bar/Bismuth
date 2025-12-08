@@ -17,11 +17,23 @@ export class ProfileService {
       typeof profileOrId === 'number' ? await User.findOrFail(profileOrId) : profileOrId
 
     if (signature) {
-      profile.signature = await this.uploadService.replaceFile(profile.signature, signature)
+      profile.signature = await this.uploadService.replaceImage(profile.signature, signature, {
+        width: 100,
+        fit: 'cover',
+        quality: 90,
+      })
     }
 
     if (companyIcon) {
-      profile.companyIcon = await this.uploadService.replaceFile(profile.companyIcon, companyIcon)
+      profile.companyIcon = await this.uploadService.replaceImage(
+        profile.companyIcon,
+        companyIcon,
+        {
+          height: 60,
+          fit: 'cover',
+          quality: 90,
+        }
+      )
     }
 
     return await profile.merge(rest).save()

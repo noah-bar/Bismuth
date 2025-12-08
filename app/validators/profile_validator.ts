@@ -7,7 +7,7 @@ export const updateProfileValidator = vine.compile(
     city: vine.string().trim().optional(),
     phoneNumber: vine.string().mobile().trim().optional(),
     companyName: vine.string().trim().optional(),
-    companyIcon: vine.file({ extnames: ['png', 'jpg'], size: '5mb' }).optional(),
-    signature: vine.file({ extnames: ['png', 'jpg'], size: '5mb' }).optional(),
+    companyIcon: vine.file({ extnames: ['png', 'jpg', 'jpeg', 'webp'], size: '5mb' }).optional(),
+    signature: vine.file({ extnames: ['png', 'jpg', 'jpeg', 'webp'], size: '5mb' }).optional(),
   })
 )
