@@ -19,6 +19,23 @@
       }
     }
   },
+  "profile": {
+    "profile-form": {
+      "title": "Mon profil",
+      "fields": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "Adresse email",
+        "phoneNumber": "Numéro de téléphone",
+        "address": "Adresse",
+        "postalCode": "Code postal",
+        "city": "Ville",
+        "signature": "Signature",
+        "companyName": "Nom de la société",
+        "companyIcon": "Icône de la société"
+      }
+    }
+  },
   "company": {
     "company-data-table": {
       "headers": {
