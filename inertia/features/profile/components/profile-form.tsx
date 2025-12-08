@@ -147,6 +147,9 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             name={'companyIcon'}
             onChange={(e) => form.setData('companyIcon', e.target.files?.[0])}
           />
+          <div className={"flex justify-center items-center"}>
+            <img src={user.companyIconUrl}/>
+          </div>
         </FormControl>
         <FormControl error={form.errors.signature}>
           <Label htmlFor={'signature'}>{t('features.profile.profile-form.fields.signature')}</Label>
@@ -156,6 +159,9 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             name={'signature'}
             onChange={(e) => form.setData('signature', e.target.files?.[0])}
           />
+          <div className={"flex justify-center items-center"}>
+            <img src={user.signatureUrl}/>
+          </div>
         </FormControl>
       </FormRow>
     </Form>
