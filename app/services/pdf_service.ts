@@ -19,8 +19,15 @@ export class PdfService {
     const pdf = await page.pdf({
       format: 'A4',
       printBackground: true,
+      displayHeaderFooter: true,
+      headerTemplate: '<div></div>',
+      footerTemplate: `
+        <div style="font-family: 'Helvetica', 'Arial', sans-serif; font-size: 10pt; width: 100%; text-align: center; color: #7f8c8d; padding: 0 15mm;">
+          <span>Page <span class="pageNumber"></span> / <span class="totalPages"></span></span>
+        </div>
+      `,
       margin: {
-        top: '20mm',
+        top: '10mm',
         right: '15mm',
         bottom: '20mm',
         left: '15mm',
