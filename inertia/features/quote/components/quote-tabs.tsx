@@ -14,7 +14,7 @@ export function QuoteTabs({ className, quote }: QuoteTabsProps) {
   return (
     <Box className={className}>
       <Tabs defaultValue={'offer'} className="h-full flex flex-col">
-        <TabsList>
+        <TabsList className={"mx-auto"}>
           <TabsTrigger value="offer">{t('features.quote.quote-tabs.tabs.offer')}</TabsTrigger>
           <TabsTrigger value="order">{t('features.quote.quote-tabs.tabs.order')}</TabsTrigger>
           <TabsTrigger value="invoice">{t('features.quote.quote-tabs.tabs.invoice')}</TabsTrigger>
