@@ -14,6 +14,7 @@ import { LogoutButton, useAuth } from '@/features/auth'
 import { useI18n } from '@/hooks/use-i18n'
 import { Link, usePage } from '@inertiajs/react'
 import { Building2Icon, ChartPieIcon, FileTextIcon, UserPlusIcon } from 'lucide-react'
+import { ProfileButton } from '~/features/profile'
 
 export function AppSidebar() {
   const { user } = useAuth()
@@ -68,7 +69,8 @@ export function AppSidebar() {
       <SidebarFooter className={'h-[50px] border-t border-border'}>
         <div className={'flex items-center justify-between'}>
           {user.firstName} {user.lastName}
-          <div>
+          <div className={"flex items-center justify-center gap-2"}>
+            <ProfileButton/>
             <LogoutButton />
           </div>
         </div>
