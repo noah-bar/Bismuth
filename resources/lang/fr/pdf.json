@@ -1,0 +1,26 @@
+{
+  "quote": {
+    "title": "Offre",
+    "meta": {
+      "title": "Titre",
+      "date": "Date",
+      "version": "Version"
+    },
+    "parties": {
+      "from": "De",
+      "to": "À"
+    },
+    "items": {
+      "description": "Description",
+      "amount": "Montant"
+    },
+    "total": {
+      "subtotal": "Sous-total HT:",
+      "tax": "TVA (8.1%):",
+      "total": "Total TTC:"
+    },
+    "pagination": {
+      "page": "Page"
+    }
+  }
+}
