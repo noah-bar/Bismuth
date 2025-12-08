@@ -1,9 +1,10 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbRememberMeTokensProvider } from '@adonisjs/auth/session'
+import router from '@adonisjs/core/services/router'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -38,6 +39,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare phoneNumber: string
 
   @column()
+  declare companyName: string
+
+  @column()
   declare signature: string
 
   @column()
@@ -51,4 +55,16 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  @computed()
+  get signatureUrl(): string | null {
+    if (!this.signature) return null
+    return router.builder().params([this.signature]).make('uploads.show')
+  }
+
+  @computed()
+  get companyIconUrl(): string | null {
+    if (!this.companyIcon) return null
+    return router.builder().params([this.companyIcon]).make('uploads.show')
+  }
 }
