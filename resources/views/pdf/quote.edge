@@ -1,4 +1,6 @@
 @layout.pdf()
   @slot('main')
+    <img src="{{ quote.user.companyIconUrl }}"/>
+    <img src="{{ quote.user.signatureUrl }}"/>
   @endslot
 @end

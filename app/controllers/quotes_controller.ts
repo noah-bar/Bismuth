@@ -101,6 +101,7 @@ export default class QuotesController {
     const quote = await this.service.getQuote(params.id)
     await quote.load('company')
     await quote.load('contact')
+    await quote.load('user')
 
     const html = await view.render('pdf/quote', { quote })
 
