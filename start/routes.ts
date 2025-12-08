@@ -13,6 +13,8 @@ const CompaniesController = () => import('#controllers/companies_controller')
 const ContactsController = () => import('#controllers/contacts_controller')
 const QuotesController = () => import('#controllers/quotes_controller')
 const SessionController = () => import('#controllers/session_controller')
+const ProfilesController = () => import('#controllers/profiles_controller')
+const UploadsController = () => import('#controllers/uploads_controller')
 
 router
   .group(() => {
@@ -28,6 +30,8 @@ router
     router.resource('contacts', ContactsController)
     router.get('/quotes/:id/offer', [QuotesController, 'offer']).as('quotes.offer')
     router.resource('quotes', QuotesController)
+    router.resource('profiles', ProfilesController).only(['edit', 'update'])
     router.delete('/logout', [SessionController, 'destroy']).as('session.destroy')
+    router.get('/uploads/*', [UploadsController, 'show']).as('uploads.show')
   })
   .use(middleware.auth())
