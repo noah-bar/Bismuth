@@ -1,6 +1,21 @@
 @layout.pdf()
   @slot('main')
-    <img src="{{ quote.user.companyIconBase64 }}"/>
-    <img src="{{ quote.user.signatureBase64 }}"/>
+    @!component('pdf/partials/styles')
+
+    <div class="container">
+      @!component('pdf/partials/header', { quote })
+
+      @!component('pdf/partials/meta', { quote })
+
+      @!component('pdf/partials/parties', { quote })
+
+      @!component('pdf/partials/items', { quote })
+
+      @!component('pdf/partials/total', { quote })
+
+      @!component('pdf/partials/signature', { quote })
+
+      @!component('pdf/partials/footer', { quote })
+    </div>
   @endslot
 @end
