@@ -5,6 +5,7 @@ import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbRememberMeTokensProvider } from '@adonisjs/auth/session'
 import router from '@adonisjs/core/services/router'
+import { UploadService } from '#services/upload_service'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -66,5 +67,17 @@ export default class User extends compose(BaseModel, AuthFinder) {
   get companyIconUrl(): string | null {
     if (!this.companyIcon) return null
     return router.builder().params([this.companyIcon]).make('uploads.show')
+  }
+
+  @computed({ serializeAs: null })
+  get companyIconBase64(): string | null {
+    const uploadService = new UploadService()
+    return uploadService.getFileAsBase64(this.companyIcon)
+  }
+
+  @computed({ serializeAs: null })
+  get signatureBase64(): string | null {
+    const uploadService = new UploadService()
+    return uploadService.getFileAsBase64(this.signature)
   }
 }

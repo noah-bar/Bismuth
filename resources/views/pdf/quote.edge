@@ -1,6 +1,6 @@
 @layout.pdf()
   @slot('main')
-    <img src="{{ quote.user.companyIconUrl }}"/>
-    <img src="{{ quote.user.signatureUrl }}"/>
+    <img src="{{ quote.user.companyIconBase64 }}"/>
+    <img src="{{ quote.user.signatureBase64 }}"/>
   @endslot
 @end

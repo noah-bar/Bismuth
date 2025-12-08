@@ -109,4 +109,17 @@ export class UploadService {
   public getFilePath(fileName: string): string {
     return app.makePath(this.baseUploadPath, fileName)
   }
+
+  public getFileAsBase64(fileName: string | null | undefined): string | null {
+    if (!fileName || !this.fileExists(fileName)) {
+      return null
+    }
+
+    const filePath = this.getFilePath(fileName)
+    const fileBuffer = fs.readFileSync(filePath)
+    const base64 = fileBuffer.toString('base64')
+    const mimeType = fileName.endsWith('.webp') ? 'image/webp' : 'image/png'
+
+    return `data:${mimeType};base64,${base64}`
+  }
 }
