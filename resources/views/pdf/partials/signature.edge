@@ -1,0 +1,6 @@
+@if(quote.user.signatureBase64)
+  <div class="signature-section">
+    <img src="{{ quote.user.signatureBase64 }}" alt="Signature" class="signature-image">
+    <div class="signature-name">{{ quote.user.firstName }} {{ quote.user.lastName }}</div>
+  </div>
+@endif
