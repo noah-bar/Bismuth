@@ -1,26 +1,24 @@
 {
-  "quote": {
+  "offer": {
     "title": "Offre",
+    "description": [
+      "Madame, monsieur,",
+      "Nous sommes ravis de vous transmettre la proposition commerciale suivante: "
+    ],
     "meta": {
-      "title": "Titre",
-      "date": "Date",
-      "version": "Version"
-    },
-    "parties": {
-      "from": "De",
-      "to": "À"
-    },
-    "items": {
-      "description": "Description",
-      "amount": "Montant"
-    },
-    "total": {
-      "subtotal": "Sous-total HT:",
-      "tax": "TVA (8.1%):",
-      "total": "Total TTC:"
-    },
-    "pagination": {
-      "page": "Page"
+      "date": "Date de l'offre: ",
+      "version": "Offre N° "
     }
-  }
+  },
+  "invoice": {
+    "title": "Facture"
+  },
+  "general-conditions": {
+    "title": "Conditions générales",
+    "vat": "TVA: non assujetti"
+  },
+  "total": "Total",
+  "total-without-vat": "Total hors TVA",
+  "vat": "TVA (8.1%)",
+  "designation": "Désignation"
 }

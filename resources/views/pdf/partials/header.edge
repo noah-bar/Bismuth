@@ -5,6 +5,8 @@
     @endif
   </div>
   <div class="header-right">
-    <div class="quote-title">{{ t('pdf.quote.title') }}</div>
+    @if(title)
+      <div class="quote-title">{{ title }}</div>
+    @endif
   </div>
 </div>

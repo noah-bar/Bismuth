@@ -1,0 +1,42 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="text-start">{{ t('pdf.designation') }}</th>
+      <th class="text-center" style="max-width: 75px;">{{ t('pdf.total') }} ({{ quote.currency }})</th>
+    </tr>
+  </thead>
+  <tbody>
+    @each(item in quote.items)
+      <tr>
+        <td>
+          <span class="bold">{{ item.title }}</span>
+          <ul>
+            @each(item in item.description.split('\n'))
+            <li>{{ item }}</li>
+            @endeach
+          </ul>
+        </td>
+        <td class="text-center bold">{{ item.price?.toFixed(2) }} {{ quote.currency }}</td>
+      </tr>
+    @endeach
+    @if(quote.taxIncluded)
+      <tr>
+        <td class="bold">{{ t('pdf.total-without-vat') }}</td>
+        <td class="text-center bold">{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</td>
+      </tr>
+      <tr>
+        <td class="bold">{{ t('pdf.vat') }}</td>
+        <td class="text-center bold">{{ (quote.totalPrice / 100 * 8.1).toFixed(2) }} {{ quote.currency }}</td>
+      </tr>
+      <tr>
+        <td class="bold">{{ t('pdf.total') }}</td>
+        <td class="text-center bold">{{ quote.totalPriceWithVat.toFixed(2) }} {{ quote.currency }}</td>
+      </tr>
+    @else
+      <tr>
+        <td class="bold">{{ t('pdf.total') }}</td>
+        <td class="text-center bold">{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</td>
+      </tr>
+    @endif
+  </tbody>
+</table>
