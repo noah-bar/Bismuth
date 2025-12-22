@@ -58,6 +58,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             name={'firstName'}
             value={form.data.firstName}
             onChange={(e) => form.setData('firstName', e.target.value)}
+            disabled
           />
         </FormControl>
         <FormControl error={form.errors.lastName}>
@@ -67,6 +68,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             name={'lastName'}
             value={form.data.lastName}
             onChange={(e) => form.setData('lastName', e.target.value)}
+            disabled
           />
         </FormControl>
       </FormRow>
@@ -78,6 +80,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             name={'email'}
             value={form.data.email}
             onChange={(e) => form.setData('email', e.target.value)}
+            disabled
           />
         </FormControl>
         <FormControl error={form.errors.phoneNumber}>
