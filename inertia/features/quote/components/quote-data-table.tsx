@@ -10,13 +10,19 @@ import {
 import { useConfirm } from '@/hooks/use-confirm'
 import { useI18n } from '@/hooks/use-i18n'
 import { Paginated } from '@/types/paginated'
-import { Link, router } from '@inertiajs/react'
-import { EditIcon, TrashIcon } from 'lucide-react'
+import { router } from '@inertiajs/react'
+import { EditIcon, EllipsisIcon, TrashIcon } from 'lucide-react'
 import { Quote } from '~/types/quote'
 import { SortableDataTableHead } from '~/components/ui/sortable-data-table-head'
 import { formatDate } from '~/lib/utils'
 import { QuoteStatusBadge } from './quote-status-badge'
 import type { MouseEvent } from 'react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '~/components/ui/dropdown-menu'
 
 type QuoteDataTableProps = {
   className?: string
@@ -27,7 +33,7 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
   const { t } = useI18n()
   const { confirm } = useConfirm()
 
-  const handleDelete = async (e: MouseEvent<HTMLButtonElement>, id: number) => {
+  const handleDelete = async (e: MouseEvent<HTMLDivElement>, id: number) => {
     e.stopPropagation()
     if (await confirm()) {
       router.delete(`/quotes/${id}`, {
@@ -82,21 +88,21 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
               </div>
             </DataTableCell>
             <DataTableCell>
-              <div className={'flex gap-2 w-full justify-center items-center'}>
-                <Button size={'icon'} variant={'ghost'} onClick={(e) => handleDelete(e, quote.id)}>
-                  <TrashIcon />
-                </Button>
-                <Button
-                  size={'icon'}
-                  variant={'ghost'}
-                  asChild
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <Link href={`/quotes/${quote.id}/edit`}>
-                    <EditIcon />
-                  </Link>
-                </Button>
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Button size={'icon'} variant={'ghost'}>
+                    <EllipsisIcon />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => router.visit(`/quotes/${quote.id}/edit`)}>
+                    <EditIcon /> {t('features.quote.quote-data-table.actions.edit')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={(e) => handleDelete(e, quote.id)}>
+                    <TrashIcon /> {t('features.quote.quote-data-table.actions.delete')}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </DataTableCell>
           </DataTableRow>
         ))}
