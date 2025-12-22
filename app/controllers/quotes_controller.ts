@@ -103,7 +103,7 @@ export default class QuotesController {
     await quote.load('contact')
     await quote.load('user')
 
-    const html = await view.render('pdf/quote', { quote })
+    const html = await view.render('pdf/offer', { quote })
 
     switch (request.accepts(['html', 'pdf'])) {
       case 'pdf':
