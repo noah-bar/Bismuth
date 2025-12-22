@@ -31,6 +31,7 @@ export type Quote = {
   version: number
   items: QuoteItem[]
   totalPrice: number
+  totalPriceWithVat: number
   createdAt: string
   updatedAt: string
 }

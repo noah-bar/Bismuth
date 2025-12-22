@@ -60,6 +60,9 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
   declare totalPrice: number
 
   @column()
+  declare totalPriceWithVat: number
+
+  @column()
   declare userId: number
 
   @belongsTo(() => User)
@@ -86,7 +89,10 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
   @beforeSave()
   public static async calculateTotalPrice(quote: Quote) {
     if (quote.$dirty.items) {
-      quote.totalPrice = quote.items.reduce((sum, item) => sum + (item.price || 0), 0)
+      const subtotal = quote.items.reduce((sum, item) => sum + (item.price || 0), 0)
+
+      quote.totalPrice = subtotal
+      quote.totalPriceWithVat = subtotal * 1.081
     }
   }
 
