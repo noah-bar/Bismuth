@@ -49,14 +49,43 @@
       border-collapse: collapse;
       margin-top: 15px;
       margin-bottom: 15px;
+      border: 1px solid #dee2e6;
     }
 
-    .table th, .table td {
-      padding: .125rem;
+    .table thead {
+      background-color: #2c3e50;
+      color: white;
     }
 
-    .table tr, .table th, .table td {
-      border: 1px solid black;
+    .table thead th {
+      padding: 4px 6px;
+      font-weight: bold;
+      font-size: 10pt;
+    }
+
+    .table tbody td {
+      padding: 4px 6px;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table tbody tr.total-row td {
+      padding: 4px 6px;
+      font-weight: bold;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .table tbody tr.grand-total {
+      background-color: #f8f9fa;
+    }
+
+    .table tbody tr.grand-total td {
+      padding: 5px 6px;
+      font-weight: bold;
+      font-size: 10pt;
     }
 
     ul {
