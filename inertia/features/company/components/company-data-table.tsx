@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import {
   DataTable,
   DataTableBody,
@@ -11,9 +10,10 @@ import { SortableDataTableHead } from '@/components/ui/sortable-data-table-head'
 import { useConfirm } from '@/hooks/use-confirm'
 import { useI18n } from '@/hooks/use-i18n'
 import { Paginated } from '@/types/paginated'
-import { Link, router } from '@inertiajs/react'
-import { EditIcon, TrashIcon } from 'lucide-react'
+import { router } from '@inertiajs/react'
 import { Company } from '~/types/company'
+import { ActionDropdownMenu } from '~/components/shared/action-dropdown-menu'
+import { MouseEvent } from 'react'
 
 type CompanyDataTableProps = {
   className?: string
@@ -24,9 +24,16 @@ export function CompanyDataTable({ data, className }: CompanyDataTableProps) {
   const { t } = useI18n()
   const { confirm } = useConfirm()
 
-  const handleDelete = async (id: number) => {
+  const handleEdit = (e: MouseEvent<HTMLDivElement>, company: Company) => {
+    e.stopPropagation()
+    router.visit(`/companies/${company.id}/edit`)
+  }
+
+  const handleDelete = async (e: MouseEvent<HTMLDivElement>, company: Company) => {
+    e.stopPropagation()
+
     if (await confirm()) {
-      router.delete(`/companies/${id}`, {
+      router.delete(`/companies/${company.id}`, {
         preserveState: true,
         preserveScroll: true,
       })
@@ -60,16 +67,10 @@ export function CompanyDataTable({ data, className }: CompanyDataTableProps) {
             <DataTableCell>{company.postalCode}</DataTableCell>
             <DataTableCell>{company.city}</DataTableCell>
             <DataTableCell>
-              <div className={'flex gap-2 w-full justify-center items-center'}>
-                <Button size={'icon'} variant={'ghost'} onClick={() => handleDelete(company.id)}>
-                  <TrashIcon />
-                </Button>
-                <Button size={'icon'} variant={'ghost'} asChild>
-                  <Link href={`/companies/${company.id}/edit`}>
-                    <EditIcon />
-                  </Link>
-                </Button>
-              </div>
+              <ActionDropdownMenu
+                onEdit={(e) => handleEdit(e, company)}
+                onDelete={(e) => handleDelete(e, company)}
+              />
             </DataTableCell>
           </DataTableRow>
         ))}
