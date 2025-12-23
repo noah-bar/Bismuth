@@ -33,5 +33,9 @@
   "data-table-pagination": {
     "previous": "Précédent",
     "next": "Suivant"
+  },
+  "action-dropdown-menu": {
+    "edit": "Modifier",
+    "delete": "Supprimer"
   }
 }

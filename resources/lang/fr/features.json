@@ -115,10 +115,6 @@
         "contact": "Contact",
         "status": "Statut",
         "actions": "Actions"
-      },
-      "actions": {
-        "delete": "Supprimer",
-        "edit": "Modifier"
       }
     },
     "quote-tabs": {
