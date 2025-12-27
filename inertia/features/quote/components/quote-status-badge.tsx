@@ -58,7 +58,7 @@ export function QuoteStatusBadge({ status }: QuoteStatusBadgeProps) {
           {text}
         </Badge>
       )
+    default:
+      return <Badge></Badge>
   }
-
-  return <Badge></Badge>
 }
