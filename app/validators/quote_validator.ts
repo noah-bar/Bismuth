@@ -10,6 +10,12 @@ export const createQuoteValidator = vine.compile(
     currency: vine.enum(['CHF', 'EUR', 'USD']),
     status: vine.enum(Object.values(QuoteStatus)),
     taxIncluded: vine.boolean(),
+    orderNumber: vine.string().trim().optional(),
+    order: vine.file({ extnames: ['pdf'], size: '5mb' }).optional(),
+    invoiceDate: vine
+      .date()
+      .transform((value) => DateTime.fromJSDate(value))
+      .optional(),
     companyId: vine
       .number()
       .positive()
@@ -48,6 +54,12 @@ export const updateQuoteValidator = vine.compile(
     currency: vine.enum(['CHF', 'EUR', 'USD']).optional(),
     status: vine.enum(Object.values(QuoteStatus)).optional(),
     taxIncluded: vine.boolean().optional(),
+    orderNumber: vine.string().trim().optional(),
+    order: vine.file({ extnames: ['pdf'], size: '5mb' }).optional(),
+    invoiceDate: vine
+      .date()
+      .transform((value) => DateTime.fromJSDate(value))
+      .optional(),
     companyId: vine
       .number()
       .positive()
