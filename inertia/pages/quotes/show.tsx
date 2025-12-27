@@ -1,7 +1,7 @@
-import { QuoteMenubar, QuoteStatusBadge, QuoteTabs } from '~/features/quote'
+import { QuoteMenubar, QuoteStatusBadge, QuoteStepsDialog, QuoteTabs } from '~/features/quote'
 import { ReactNode, useTransition } from 'react'
 import { AppLayout } from '~/components/layouts/app-layout'
-import type { Quote } from '~/types/quote'
+import { Quote, QuoteStatus } from '~/types/quote'
 import { Box } from '~/components/shared/box'
 import { Button } from '~/components/ui/button'
 import { ArrowRightIcon, DownloadIcon } from 'lucide-react'
@@ -28,9 +28,15 @@ function Show({ quote }: ShowProps) {
         <Button size={'icon'} onClick={handleDownloadPdf}>
           {isDownloading ? <Spinner /> : <DownloadIcon />}
         </Button>
-        <Button size={'icon'} variant={'outline'}>
-          <ArrowRightIcon />
-        </Button>
+        <QuoteStepsDialog quote={quote}>
+          <Button
+            size={'icon'}
+            variant={'outline'}
+            disabled={[QuoteStatus.CLOSED, QuoteStatus.REJECTED].includes(quote.status)}
+          >
+            <ArrowRightIcon />
+          </Button>
+        </QuoteStepsDialog>
       </Box>
     </div>
   )

@@ -29,6 +29,9 @@ export type Quote = {
   contact: Contact
   taxIncluded: boolean
   version: number
+  orderNumber?: string
+  order?: string
+  invoiceDate?: string
   items: QuoteItem[]
   totalPrice: number
   totalPriceWithVat: number
@@ -36,5 +39,7 @@ export type Quote = {
   updatedAt: string
 }
 
-export type CreateQuote = Omit<Quote, 'id' | 'createdAt' | 'updatedAt'>
+export type CreateQuote = Omit<Quote, 'id' | 'createdAt' | 'updatedAt' | 'order'> & {
+  order?: File
+}
 export type UpdateQuote = Partial<CreateQuote>

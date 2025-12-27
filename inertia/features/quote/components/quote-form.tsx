@@ -26,7 +26,7 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
     contacts: Contact[]
     statuses: QuoteStatus[]
   }>().props
-  const form = useForm<CreateQuote | UpdateQuote>(data)
+  const form = useForm<CreateQuote | UpdateQuote>({ ...data, order: undefined })
   const id = 'id' in form.data ? form.data.id : undefined
   const editMode = !!id
   const formTitle = editMode
