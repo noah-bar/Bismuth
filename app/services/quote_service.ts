@@ -5,13 +5,16 @@ import User from '#models/user'
 import { Infer } from '@vinejs/vine/types'
 import { createQuoteValidator, updateQuoteValidator } from '#validators/quote_validator'
 import { ModelQueryBuilderContract } from '@adonisjs/lucid/types/model'
+import { UploadService } from '#services/upload_service'
 
 @inject()
 export class QuoteService {
   private user: User
+  private uploadService: UploadService
 
   constructor(ctx: HttpContext) {
     this.user = ctx.auth.getUserOrFail()
+    this.uploadService = new UploadService()
   }
 
   public getQuotes(): ModelQueryBuilderContract<typeof Quote> {
@@ -25,16 +28,28 @@ export class QuoteService {
       .firstOrFail()
   }
 
-  public async createQuote(quote: Infer<typeof createQuoteValidator>): Promise<Quote> {
+  public async createQuote(data: Infer<typeof createQuoteValidator>): Promise<Quote> {
+    const { order, ...rest } = data
+
+    if (order) {
+      await this.uploadService.uploadFile(order)
+    }
+
     return await Quote.create({
-      ...quote,
+      ...rest,
       userId: this.user.id,
     })
   }
 
   public async updateQuote(id: number, data: Infer<typeof updateQuoteValidator>): Promise<Quote> {
+    const { order, ...rest } = data
     const quote = await this.getQuote(id)
-    return await quote.merge(data).save()
+
+    if (order) {
+      quote.order = await this.uploadService.replaceFile(quote.order, order)
+    }
+
+    return await quote.merge(rest).save()
   }
 
   public async deleteQuote(id: number): Promise<void> {

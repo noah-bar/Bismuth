@@ -80,6 +80,15 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
   @belongsTo(() => Contact)
   declare contact: BelongsTo<typeof Contact>
 
+  @column()
+  declare orderNumber: string
+
+  @column()
+  declare order: string
+
+  @column.date()
+  declare invoiceDate: DateTime
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
