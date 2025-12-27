@@ -92,9 +92,9 @@ export default class QuotesController {
 
   public async update({ response, request, params }: HttpContext) {
     const payload = await request.validateUsing(updateQuoteValidator)
-    const quote = await this.service.updateQuote(params.id, payload)
+    await this.service.updateQuote(params.id, payload)
 
-    return response.redirect().toRoute('quotes.edit', { id: quote.id })
+    return response.redirect().back()
   }
 
   public async offer({ params, view, request, response }: HttpContext) {
@@ -104,6 +104,28 @@ export default class QuotesController {
     await quote.load('user')
 
     const html = await view.render('pdf/offer', { quote })
+
+    switch (request.accepts(['html', 'pdf'])) {
+      case 'pdf':
+        const pdfBuffer = await this.pdfService.generatePdfFromHtml(html)
+
+        response.header('Content-Type', 'application/pdf')
+        response.header('Content-Disposition', `attachment;"`)
+
+        return response.send(pdfBuffer)
+      default:
+        response.header('Content-Type', 'text/html')
+        return html
+    }
+  }
+
+  public async invoice({ params, view, request, response }: HttpContext) {
+    const quote = await this.service.getQuote(params.id)
+    await quote.load('company')
+    await quote.load('contact')
+    await quote.load('user')
+
+    const html = await view.render('pdf/invoice', { quote })
 
     switch (request.accepts(['html', 'pdf'])) {
       case 'pdf':

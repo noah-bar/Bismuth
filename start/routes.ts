@@ -29,6 +29,7 @@ router
     router.resource('companies', CompaniesController)
     router.resource('contacts', ContactsController)
     router.get('/quotes/:id/offer', [QuotesController, 'offer']).as('quotes.offer')
+    router.get('/quotes/:id/invoice', [QuotesController, 'invoice']).as('quotes.invoice')
     router.resource('quotes', QuotesController)
     router.resource('profiles', ProfilesController).only(['edit', 'update'])
     router.delete('/logout', [SessionController, 'destroy']).as('session.destroy')
