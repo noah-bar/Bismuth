@@ -69,7 +69,7 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
   declare user: BelongsTo<typeof User>
 
   @column()
-  declare companyId: number
+  declare companyId: number | null
 
   @belongsTo(() => Company)
   declare company: BelongsTo<typeof Company>
