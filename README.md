@@ -18,7 +18,7 @@ A modern quote management system built with AdonisJS 6 and React 19. Bismuth hel
 ### Backend
 
 - **Framework**: AdonisJS v6 with TypeScript
-- **Database**: SQLite with Lucid ORM
+- **Database**: MySQL with Lucid ORM
 - **Authentication**: Session-based auth with remember me tokens
 - **Validation**: VineJS for request validation
 - **PDF Generation**: Puppeteer with Edge.js templates
@@ -44,6 +44,7 @@ A modern quote management system built with AdonisJS 6 and React 19. Bismuth hel
 
 - Node.js >= 20.x
 - npm or yarn or bun
+- MySQL >= 8.0
 
 ## Installation
 
@@ -60,25 +61,42 @@ cd Bismuth
 npm install
 ```
 
-3. Configure environment:
+3. Create a MySQL database:
+
+```bash
+mysql -u root -p
+CREATE DATABASE app;
+```
+
+4. Configure environment:
 
 ```bash
 cp .env.example .env
 ```
 
-4. Generate application key:
+Edit `.env` and configure your MySQL connection:
+
+```env
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=your_password
+DB_DATABASE=app
+```
+
+5. Generate application key:
 
 ```bash
 node ace generate:key
 ```
 
-5. Run database migrations:
+6. Run database migrations:
 
 ```bash
 node ace migration:run
 ```
 
-6. Create a user account:
+7. Create a user account:
 
 ```bash
 node ace create:user <firstName> <lastName> <email> [password]
@@ -92,7 +110,7 @@ node ace create:user John Doe john@example.com mypassword
 
 If password is omitted, a random password will be generated and displayed.
 
-7. Start the development server:
+8. Start the development server:
 
 ```bash
 npm run dev
@@ -113,6 +131,11 @@ APP_KEY=<generated-key>
 NODE_ENV=development
 SESSION_DRIVER=cookie
 DRIVE_DISK=fs
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=your_password
+DB_DATABASE=app
 ```
 
 ## Available Scripts
