@@ -149,6 +149,7 @@ function Sidebar({
   collapsible = 'offcanvas',
   className,
   children,
+  style,
   ...props
 }: React.ComponentProps<'div'> & {
   side?: 'left' | 'right'
@@ -159,6 +160,7 @@ function Sidebar({
   const styles: React.CSSProperties = {
     paddingTop: 'env(safe-area-inset-top)',
     paddingBottom: 'env(safe-area-inset-bottom)',
+    ...style,
   }
 
   if (collapsible === 'none') {
@@ -188,6 +190,7 @@ function Sidebar({
           style={
             {
               '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
+              ...styles
             } as React.CSSProperties
           }
           side={side}
