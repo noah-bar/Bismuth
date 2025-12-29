@@ -13,12 +13,12 @@ type IndexProps = {
 function Index({ quotes }: IndexProps) {
   return (
     <div className={'grid size-full grid-rows-[auto_1fr] gap-2'}>
-      <Box className={"flex gap-4"}>
+      <Box className={'flex gap-4'}>
         <div className={'max-w-[325px]'}>
           <SearchInput results={quotes.meta.total} />
         </div>
         <div>
-          <QuoteStatusFilterSelect/>
+          <QuoteStatusFilterSelect />
         </div>
       </Box>
       <QuoteDataTable data={quotes} />

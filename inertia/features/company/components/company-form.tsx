@@ -44,7 +44,7 @@ export function CompanyForm({ data, onSubmit, ...props }: CompanyFormProps) {
       header={<h1 className={'text-xl font-semibold'}>{formTitle}</h1>}
       footer={
         <div className={'flex size-full justify-between'}>
-          <BackButton url={"/companies"} isDirty={form.isDirty} />
+          <BackButton url={'/companies'} isDirty={form.isDirty} />
           <SubmitButton isProcessing={form.processing} disabled={!form.isDirty} />
         </div>
       }

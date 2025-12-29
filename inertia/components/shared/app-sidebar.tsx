@@ -69,8 +69,8 @@ export function AppSidebar() {
       <SidebarFooter className={'h-[50px] border-t border-border'}>
         <div className={'flex items-center justify-between'}>
           {user.firstName} {user.lastName}
-          <div className={"flex items-center justify-center gap-2"}>
-            <ProfileButton/>
+          <div className={'flex items-center justify-center gap-2'}>
+            <ProfileButton />
             <LogoutButton />
           </div>
         </div>

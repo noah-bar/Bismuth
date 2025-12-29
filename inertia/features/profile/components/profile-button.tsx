@@ -8,7 +8,7 @@ export function ProfileButton() {
   return (
     <Button size={'icon'} variant={'ghost'} asChild>
       <Link href={`/profiles/${user.id}/edit`}>
-        <UserRoundIcon/>
+        <UserRoundIcon />
       </Link>
     </Button>
   )

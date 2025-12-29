@@ -55,7 +55,12 @@ export function ClosedQuotesChart({ data }: ClosedQuotesChartProps) {
         <YAxis tickLine={false} axisLine={false} allowDecimals={false} />
         <ChartTooltip content={<ChartTooltipContent />} cursor={false} />
         <Bar dataKey={'count'} fill={'var(--primary)'} radius={[8, 8, 0, 0]}>
-          <LabelList dataKey={'total'} position={'top'} className={'fill-foreground text-xs'} formatter={formatCurrency} />
+          <LabelList
+            dataKey={'total'}
+            position={'top'}
+            className={'fill-foreground text-xs'}
+            formatter={formatCurrency}
+          />
         </Bar>
       </BarChart>
     </ChartContainer>

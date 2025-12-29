@@ -151,7 +151,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             onChange={(e) => form.setData('companyIcon', e.target.files?.[0])}
           />
           <div className={'flex justify-center items-center'}>
-            <img src={user.companyIconUrl} className={"h-[50px]"} />
+            <img src={user.companyIconUrl} className={'h-[50px]'} />
           </div>
         </FormControl>
         <FormControl error={form.errors.signature}>
@@ -163,7 +163,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             onChange={(e) => form.setData('signature', e.target.files?.[0])}
           />
           <div className={'flex justify-center items-center'}>
-            <img src={user.signatureUrl} className={"w-[100px]"} />
+            <img src={user.signatureUrl} className={'w-[100px]'} />
           </div>
         </FormControl>
       </FormRow>
