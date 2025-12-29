@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2025-12-29
+
+### Added
+- Add custom style prop support with safe area handling to sidebar
+- Add safe area padding for top and bottom insets to sidebar
+- Add safe area support for notched devices in PWA
+
+### Changed
+- Remove unused ImageResizeOptions interface from services
+
+### Fixed
+- Handle null signature in base64 conversion for user
+- Convert decimal fields to number for mysql compatibility in quote
+
 ## [1.0.1] - 2025-12-29
 
 ### Added
@@ -126,6 +140,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add sharp package for image processing
 - Add puppeteer dependency
 
-[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/hex-tech/bismuth/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/hex-tech/bismuth/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/hex-tech/bismuth/releases/tag/v1.0.0
