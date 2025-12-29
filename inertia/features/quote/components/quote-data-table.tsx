@@ -79,7 +79,7 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
             <DataTableCell>
               {quote.taxIncluded ? quote.totalPriceWithVat : quote.totalPrice} {quote.currency}
             </DataTableCell>
-            <DataTableCell>{quote.company.name}</DataTableCell>
+            <DataTableCell>{quote.company?.name}</DataTableCell>
             <DataTableCell>{quote.contact.fullName}</DataTableCell>
             <DataTableCell>
               <div className={'w-full flex justify-center items-center'}>

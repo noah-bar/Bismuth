@@ -22,10 +22,10 @@
 <table>
   <tbody>
     <tr>
-      <td class="bold">{{ quote.company.name }}</td>
+      <td class="bold">{{ quote.company?.name || quote.contact.fullName }}</td>
     </tr>
     <tr>
-      <td>{{ quote.company.address }}</td>
+      <td>{{ quote.company?.address || quote.contact.email }}</td>
     </tr>
     <tr>
       <td>{{ t('pdf.offer.meta.version') }}{{ quote.version }}</td>
