@@ -15,7 +15,7 @@ type ContactFormProps = FormHTMLAttributes<HTMLFormElement> & {
 }
 export function ContactForm({ data, onSubmit, ...props }: ContactFormProps) {
   const { t } = useI18n()
-  const form = useForm<CreateContact | UpdateContact>(data)
+  const form = useForm<CreateContact | UpdateContact>({ ...data })
   const id = 'id' in form.data ? form.data.id : undefined
   const editMode = !!id
   const formTitle = editMode

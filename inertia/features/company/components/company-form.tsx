@@ -15,7 +15,7 @@ type CompanyFormProps = FormHTMLAttributes<HTMLFormElement> & {
 }
 export function CompanyForm({ data, onSubmit, ...props }: CompanyFormProps) {
   const { t } = useI18n()
-  const form = useForm<CreateCompany | UpdateCompany>(data)
+  const form = useForm<CreateCompany | UpdateCompany>({ ...data })
   const id = 'id' in form.data ? form.data.id : undefined
   const editMode = !!id
   const formTitle = editMode
