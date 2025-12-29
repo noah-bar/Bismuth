@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="text-start">{{ t('pdf.designation') }}</th>
-      <th class="text-center" style="width: 120px;">{{ t('pdf.total') }} ({{ quote.currency }})</th>
+      <th class="text-center price-column">{{ t('pdf.total') }} ({{ quote.currency }})</th>
     </tr>
   </thead>
   <tbody>
@@ -15,27 +15,42 @@
             <li>{{ item }}</li>
             @endeach
           </ul>
+          <div class="price-mobile text-right">{{ item.price?.toFixed(2) }} {{ quote.currency }}</div>
         </td>
-        <td class="text-center bold">{{ item.price?.toFixed(2) }} {{ quote.currency }}</td>
+        <td class="text-center bold price-column">{{ item.price?.toFixed(2) }} {{ quote.currency }}</td>
       </tr>
     @endeach
     @if(quote.taxIncluded)
       <tr class="total-row">
-        <td>{{ t('pdf.total-without-vat') }}</td>
-        <td class="text-center">{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</td>
+        <td>
+          {{ t('pdf.total-without-vat') }}
+          <span class="price-mobile">{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</span>
+        </td>
+        <td class="text-center price-column">{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</td>
       </tr>
       <tr class="total-row">
-        <td>{{ t('pdf.vat') }}</td>
-        <td class="text-center">{{ (quote.totalPrice / 100 * 8.1).toFixed(2) }} {{ quote.currency }}</td>
+        <td>
+          {{ t('pdf.vat') }}
+          <span class="price-mobile">{{ (quote.totalPrice / 100 * 8.1).toFixed(2) }} {{ quote.currency }}</span>
+        </td>
+        <td class="text-center price-column">{{ (quote.totalPrice / 100 * 8.1).toFixed(2) }} {{ quote.currency }}</td>
       </tr>
       <tr class="grand-total">
-        <td>{{ t('pdf.total') }}</td>
-        <td class="text-center">{{ quote.totalPriceWithVat.toFixed(2) }} {{ quote.currency }}</td>
+        <td>
+          {{ t('pdf.total') }}
+          <span class="price-mobile">{{ quote.totalPriceWithVat.toFixed(2) }} {{ quote.currency }}</span>
+        </td>
+        <td class="text-center price-column">{{ quote.totalPriceWithVat.toFixed(2) }} {{ quote.currency }}</td>
       </tr>
     @else
       <tr class="grand-total">
-        <td>{{ t('pdf.total') }}</td>
-        <td class="text-center">{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</td>
+        <td>
+          <div class="w-full flex justify-between items-center">
+            <span>{{ t('pdf.total') }}</span>
+            <span class="price-mobile">{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</span>
+          </div>
+        </td>
+        <td class="text-center price-column">{{ quote.totalPrice.toFixed(2) }} {{ quote.currency }}</td>
       </tr>
     @endif
   </tbody>

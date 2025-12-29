@@ -16,6 +16,26 @@
       color: #333;
     }
 
+    .w-full {
+      width: 100%;
+    }
+
+    .flex {
+      display:flex;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .text-right {
+      text-align: right;
+    }
+
     .bold {
       font-weight: bold;
     }
@@ -91,6 +111,25 @@
     ul {
       list-style: inside;
       margin-left: 20px;
+    }
+
+    .price-column {
+      width: 120px;
+    }
+
+    .price-mobile {
+      display: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 620px) {
+      .price-column {
+        display: none;
+      }
+
+      .price-mobile {
+        display: block;
+      }
     }
   </style>
 </head>
