@@ -54,7 +54,7 @@ export function ClosedQuotesChart({ data }: ClosedQuotesChartProps) {
         <XAxis dataKey={'month'} tickLine={false} axisLine={false} />
         <YAxis tickLine={false} axisLine={false} allowDecimals={false} />
         <ChartTooltip content={<ChartTooltipContent />} cursor={false} />
-        <Bar dataKey={'count'} fill={'var(--color-count)'} radius={[8, 8, 0, 0]}>
+        <Bar dataKey={'count'} fill={'var(--primary)'} radius={[8, 8, 0, 0]}>
           <LabelList dataKey={'total'} position={'top'} className={'fill-foreground text-xs'} formatter={formatCurrency} />
         </Bar>
       </BarChart>
