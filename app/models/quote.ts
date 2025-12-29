@@ -56,10 +56,14 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
     [key: string]: any
   }>
 
-  @column()
+  @column({
+    consume: (value: string) => Number(value),
+  })
   declare totalPrice: number
 
-  @column()
+  @column({
+    consume: (value: string) => Number(value),
+  })
   declare totalPriceWithVat: number
 
   @column()
