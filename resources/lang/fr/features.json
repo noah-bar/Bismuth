@@ -168,7 +168,8 @@
       "invoiced": "Devis clôturés"
     },
     "chart": {
-      "title": "Devis clôturés par mois"
+      "title": "Devis clôturés par mois",
+      "label": "Devis"
     },
     "months": {
       "jan": "Jan",

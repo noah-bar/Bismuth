@@ -12,15 +12,15 @@ type ClosedQuotesChartProps = {
   data: MonthlyData[]
 }
 
-const chartConfig = {
-  count: {
-    label: 'Devis',
-    color: 'hsl(var(--chart-1))',
-  },
-}
-
 export function ClosedQuotesChart({ data }: ClosedQuotesChartProps) {
   const { t } = useI18n()
+
+  const chartConfig = {
+    count: {
+      label: t('features.statistics.chart.label'),
+      color: 'hsl(var(--chart-1))',
+    },
+  }
 
   const monthNames = [
     t('features.statistics.months.jan'),
