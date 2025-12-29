@@ -2,19 +2,29 @@
   <table>
     <tbody>
       <tr>
-        <td class="bold">{{ quote.user.companyName }}</td>
+        <td class="bold">
+          {{ quote.user.companyName }}
+        </td>
       </tr>
       <tr>
-        <td>{{ quote.user.address }}</td>
+        <td>
+          {{ quote.user.address }}
+        </td>
       </tr>
       <tr>
-        <td>{{ quote.user.postalCode }} {{ quote.user.city }}</td>
+        <td>
+          {{ quote.user.postalCode }} {{ quote.user.city }}
+        </td>
       </tr>
       <tr>
-        <td>{{ quote.user.phoneNumber }}</td>
+        <td>
+          {{ quote.user.phoneNumber }}
+        </td>
       </tr>
       <tr>
-        <td>{{ quote.user.email }}</td>
+        <td>
+          {{ quote.user.email }}
+        </td>
       </tr>
     </tbody>
   </table>
@@ -22,19 +32,28 @@
 <table>
   <tbody>
     <tr>
-      <td class="bold">{{ quote.company?.name || quote.contact.fullName }}</td>
+      <td class="bold">
+        {{ quote.company?.name || quote.contact.fullName }}
+      </td>
     </tr>
     <tr>
-      <td>{{ quote.company?.address || quote.contact.email }}</td>
+      <td>
+        {{ quote.company?.address || quote.contact.email }}
+      </td>
     </tr>
     <tr>
-      <td></td>
+      <td>
+      </td>
     </tr>
     <tr>
-      <td>{{ t('pdf.invoice.meta.order-number') }} {{ quote.orderNumber }}</td>
+      <td>
+        {{ t('pdf.invoice.meta.order-number') }} {{ quote.orderNumber }}
+      </td>
     </tr>
     <tr>
-      <td>{{ t('pdf.invoice.meta.date') }} {{ quote.invoiceDate?.toFormat("d.MM.yyyy") }}</td>
+      <td>
+        {{ t('pdf.invoice.meta.date') }} {{ quote.invoiceDate?.toFormat("d.MM.yyyy") }}
+      </td>
     </tr>
   </tbody>
 </table>

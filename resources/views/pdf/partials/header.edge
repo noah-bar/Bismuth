@@ -1,12 +1,19 @@
 <div class="header">
   <div class="header-left">
     @if(quote.user.companyIcon)
-      <img src="{{ await quote.user.companyIconBase64() }}" style="height:50px;" alt="Company Logo" class="company-logo">
+      <img
+        src="{{ await quote.user.companyIconBase64() }}"
+        style="height:50px;"
+        alt="Company Logo"
+        class="company-logo"
+      />
     @endif
   </div>
   <div class="header-right">
     @if(title)
-      <div class="quote-title">{{ title }}</div>
+      <div class="quote-title">
+        {{ title }}
+      </div>
     @endif
   </div>
 </div>

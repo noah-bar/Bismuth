@@ -1,9 +1,17 @@
-<p class="bold">{{ t('pdf.general-conditions.title') }}</p>
+<p class="bold">
+  {{ t('pdf.general-conditions.title') }}
+</p>
 @if(!quote.taxIncluded)
-<p>{{ t('pdf.general-conditions.vat') }}</p>
+  <p>
+    {{ t('pdf.general-conditions.vat') }}
+  </p>
 @endif
 @if(type === 'offer')
-<p>{{ t('pdf.general-conditions.validity') }}</p>
+  <p>
+    {{ t('pdf.general-conditions.validity') }}
+  </p>
 @elseif(type === 'invoice')
-<p>{{ t('pdf.general-conditions.payment') }}</p>
+  <p>
+    {{ t('pdf.general-conditions.payment') }}
+  </p>
 @endif
