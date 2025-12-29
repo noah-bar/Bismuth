@@ -14,6 +14,7 @@ const ContactsController = () => import('#controllers/contacts_controller')
 const QuotesController = () => import('#controllers/quotes_controller')
 const SessionController = () => import('#controllers/session_controller')
 const ProfilesController = () => import('#controllers/profiles_controller')
+const StatisticsController = () => import('#controllers/statistics_controller')
 
 router
   .group(() => {
@@ -25,6 +26,7 @@ router
 router
   .group(() => {
     router.get('/', ({ response }) => response.redirect().toRoute('quotes.index'))
+    router.get('/statistics', [StatisticsController, 'index']).as('statistics.index')
     router.resource('companies', CompaniesController)
     router.resource('contacts', ContactsController)
     router.get('/quotes/:id/offer', [QuotesController, 'offer']).as('quotes.offer')
