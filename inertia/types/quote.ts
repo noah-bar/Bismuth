@@ -23,8 +23,8 @@ export type Quote = {
   date: string
   currency: 'CHF' | 'EUR' | 'USD'
   status: QuoteStatus
-  companyId: number
-  company: Company
+  companyId?: number
+  company?: Company
   contactId: number
   contact: Contact
   taxIncluded: boolean

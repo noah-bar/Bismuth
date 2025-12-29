@@ -23,12 +23,14 @@ export const createQuoteValidator = vine.compile(
       .exists(async (db, value) => {
         const user = await db.from('companies').where('id', value).first()
         return user !== null
-      }),
+      })
+      .nullable(),
     contactId: vine
       .number()
       .positive()
       .withoutDecimals()
       .exists(async (db, value) => {
+        if (!value) return true
         const user = await db.from('contacts').where('id', value).first()
         return user !== null
       }),
@@ -65,9 +67,11 @@ export const updateQuoteValidator = vine.compile(
       .positive()
       .withoutDecimals()
       .exists(async (db, value) => {
+        if (!value) return true
         const user = await db.from('companies').where('id', value).first()
         return user !== null
       })
+      .nullable()
       .optional(),
     contactId: vine
       .number()
