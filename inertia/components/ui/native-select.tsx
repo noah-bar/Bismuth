@@ -29,11 +29,17 @@ function NativeSelect({ className, ...props }: React.ComponentProps<'select'>) {
 }
 
 function NativeSelectOption({ ...props }: React.ComponentProps<'option'>) {
-  return <option data-slot="native-select-option" {...props} />
+  return <option data-slot="native-select-option" className={'text-foreground'} {...props} />
 }
 
 function NativeSelectOptGroup({ className, ...props }: React.ComponentProps<'optgroup'>) {
-  return <optgroup data-slot="native-select-optgroup" className={cn(className)} {...props} />
+  return (
+    <optgroup
+      data-slot="native-select-optgroup"
+      className={cn('text-foreground', className)}
+      {...props}
+    />
+  )
 }
 
 export { NativeSelect, NativeSelectOptGroup, NativeSelectOption }
