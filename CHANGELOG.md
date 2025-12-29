@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2025-12-29
+
+### Added
+- Enhance HTML metadata and mobile support
+- Migrate database from SQLite to MySQL
+
+### Fixed
+- Spread form data to prevent reactivity issues in company and contact forms
+- Remove stray character from manifest link in layout
+
+### Changed
+- Replace better-sqlite3 with mysql2 dependency
+
 ## [1.0.0] - 2025-12-29
 
 ### Added
@@ -113,5 +126,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add sharp package for image processing
 - Add puppeteer dependency
 
-[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/hex-tech/bismuth/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/hex-tech/bismuth/releases/tag/v1.0.0
