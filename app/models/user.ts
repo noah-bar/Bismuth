@@ -60,23 +60,23 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @computed()
   get signatureUrl(): string | null {
     if (!this.signature) return null
-    return router.builder().params([this.signature]).make('uploads.show')
+    return router.builder().params([this.signature]).make('drive.fs.serve')
   }
 
   @computed()
   get companyIconUrl(): string | null {
     if (!this.companyIcon) return null
-    return router.builder().params([this.companyIcon]).make('uploads.show')
+    return router.builder().params([this.companyIcon]).make('drive.fs.serve')
   }
 
   @computed({ serializeAs: null })
-  get companyIconBase64(): string | null {
+  public async companyIconBase64(): Promise<string | null> {
     const uploadService = new UploadService()
-    return uploadService.getFileAsBase64(this.companyIcon)
+    return this.companyIcon ? await uploadService.getFileAsBase64(this.companyIcon) : null
   }
 
   @computed({ serializeAs: null })
-  get signatureBase64(): string | null {
+  public async signatureBase64(): Promise<string | null> {
     const uploadService = new UploadService()
     return uploadService.getFileAsBase64(this.signature)
   }
