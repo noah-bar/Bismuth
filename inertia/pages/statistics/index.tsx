@@ -59,7 +59,7 @@ function Index({ quoteStatistics, closedQuotesByMonth }: IndexProps) {
         />
       </div>
       <Box className={'flex flex-col gap-4'}>
-        <h2 className={'text-lg font-semibold'}>{t('features.statistics.chart.title')}</h2>
+        <h3 className={'text-lg font-semibold'}>{t('features.statistics.chart.title')}</h3>
         <ClosedQuotesChart data={closedQuotesByMonth} />
       </Box>
     </div>
