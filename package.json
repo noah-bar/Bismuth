@@ -1,6 +1,6 @@
 {
-  "name": "Bismuth",
-  "version": "0.0.0",
+  "name": "@hex-tech/bismuth",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "license": "UNLICENSED",
