@@ -3,13 +3,6 @@ import { cuid } from '@adonisjs/core/helpers'
 import fs from 'node:fs/promises'
 import drive from '@adonisjs/drive/services/main'
 
-export interface ImageResizeOptions {
-  width?: number
-  height?: number
-  fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
-  quality?: number
-}
-
 export class UploadService {
   public async toBuffer(file: MultipartFile): Promise<Buffer<ArrayBufferLike>> {
     return await fs.readFile(file.tmpPath!)
