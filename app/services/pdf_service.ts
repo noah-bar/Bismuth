@@ -1,10 +1,17 @@
 import puppeteer from 'puppeteer'
+import env from '#start/env'
 
 export class PdfService {
   private async getBrowser() {
     return await puppeteer.launch({
+      executablePath: env.get('CHROMIUM_PATH'),
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+      ],
     })
   }
 
