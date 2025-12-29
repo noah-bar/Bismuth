@@ -20,7 +20,9 @@
   },
   "general-conditions": {
     "title": "Conditions générales",
-    "vat": "TVA: non assujetti"
+    "vat": "TVA: non assujetti",
+    "validity": "Cette offre est valable 30 jours à compter de la date d'émission.",
+    "payment": "Le paiement est dû dans les 30 jours suivant la date de facturation."
   },
   "total": "Total",
   "total-without-vat": "Total hors TVA",
