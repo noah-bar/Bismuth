@@ -1,7 +1,7 @@
 <div class="header">
   <div class="header-left">
-    @if(quote.user.companyIconBase64)
-      <img src="{{ quote.user.companyIconBase64 }}" style="height:50px;" alt="Company Logo" class="company-logo">
+    @if(quote.user.companyIcon)
+      <img src="{{ await quote.user.companyIconBase64() }}" style="height:50px;" alt="Company Logo" class="company-logo">
     @endif
   </div>
   <div class="header-right">
