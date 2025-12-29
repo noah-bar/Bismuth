@@ -78,6 +78,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @computed({ serializeAs: null })
   public async signatureBase64(): Promise<string | null> {
     const uploadService = new UploadService()
-    return uploadService.getFileAsBase64(this.signature)
+    return this.signature ? uploadService.getFileAsBase64(this.signature) : null
   }
 }
