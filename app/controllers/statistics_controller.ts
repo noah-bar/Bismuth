@@ -6,11 +6,19 @@ import { StatisticsService } from '#services/statistics_service'
 export default class StatisticsController {
   constructor(private service: StatisticsService) {}
 
-  public async index({ inertia }: HttpContext) {
-    const quoteStatistics = await this.service.getQuoteStatistics()
+  public async index({ inertia, request }: HttpContext) {
+    const year = request.input('year')
+    const yearNumber = year ? Number.parseInt(year, 10) : undefined
+
+    const [quoteStatistics, availableYears] = await Promise.all([
+      this.service.getQuoteStatistics(yearNumber),
+      this.service.getAvailableYears(),
+    ])
 
     return inertia.render('statistics/index', {
       quoteStatistics,
+      availableYears,
+      selectedYear: yearNumber || new Date().getFullYear(),
     })
   }
 }

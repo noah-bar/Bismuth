@@ -1,20 +1,28 @@
 import { ReactNode } from 'react'
 import { AppLayout } from '~/components/layouts/app-layout'
-import { StatCard } from '~/features/statistics'
+import { StatCard, YearFilterSelect } from '~/features/statistics'
 import { QuoteStatistics } from '~/types/statistics'
 import { CheckCheckIcon, CheckIcon, CircleCheckBigIcon, SendIcon } from 'lucide-react'
 import { useI18n } from '~/hooks/use-i18n'
+import { Box } from '~/components/shared/box'
 
 type IndexProps = {
   quoteStatistics: QuoteStatistics
+  availableYears: number[]
+  selectedYear: number
 }
 
 function Index({ quoteStatistics }: IndexProps) {
   const { t } = useI18n()
 
   return (
-    <div className={'p-6'}>
-      <h1 className={'text-3xl font-bold mb-6'}>{t('pages.statistics.title')}</h1>
+    <div className={'h-full flex flex-col gap-2'}>
+      <Box className={'flex items-center justify-between'}>
+        <h1 className={'text-xl font-semibold'}>{t('pages.statistics.title')}</h1>
+        <div>
+          <YearFilterSelect />
+        </div>
+      </Box>
       <div className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'}>
         <StatCard
           title={t('features.statistics.stat-card.sent')}
