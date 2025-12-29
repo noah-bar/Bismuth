@@ -7,11 +7,16 @@
     ],
     "meta": {
       "date": "Date de l'offre: ",
-      "version": "Offre N° "
+      "version": "Offre N°: "
     }
   },
   "invoice": {
-    "title": "Facture"
+    "title": "Facture",
+    "description": ["Madame, monsieur,", "Vous trouverez ci-dessous les détails de la commande: "],
+    "meta": {
+      "date": "Date de la facture: ",
+      "order-number": "Commande N°: "
+    }
   },
   "general-conditions": {
     "title": "Conditions générales",
