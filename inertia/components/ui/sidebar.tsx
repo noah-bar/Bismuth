@@ -156,6 +156,10 @@ function Sidebar({
   collapsible?: 'offcanvas' | 'icon' | 'none'
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  const styles: React.CSSProperties = {
+    paddingTop: 'env(safe-area-inset-top)',
+    paddingBottom: 'env(safe-area-inset-bottom)',
+  }
 
   if (collapsible === 'none') {
     return (
@@ -165,6 +169,7 @@ function Sidebar({
           'bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col',
           className
         )}
+        style={styles}
         {...props}
       >
         {children}
