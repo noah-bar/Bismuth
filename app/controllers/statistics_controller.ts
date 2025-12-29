@@ -10,15 +10,17 @@ export default class StatisticsController {
     const year = request.input('year')
     const yearNumber = year ? Number.parseInt(year, 10) : undefined
 
-    const [quoteStatistics, availableYears] = await Promise.all([
+    const [quoteStatistics, availableYears, closedQuotesByMonth] = await Promise.all([
       this.service.getQuoteStatistics(yearNumber),
       this.service.getAvailableYears(),
+      this.service.getClosedQuotesByMonth(yearNumber),
     ])
 
     return inertia.render('statistics/index', {
       quoteStatistics,
       availableYears,
       selectedYear: yearNumber || new Date().getFullYear(),
+      closedQuotesByMonth,
     })
   }
 }

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { AppLayout } from '~/components/layouts/app-layout'
-import { StatCard, YearFilterSelect } from '~/features/statistics'
+import { ClosedQuotesChart, MonthlyData, StatCard, YearFilterSelect } from '~/features/statistics'
 import { QuoteStatistics } from '~/types/statistics'
 import { CheckCheckIcon, CheckIcon, CircleCheckBigIcon, SendIcon } from 'lucide-react'
 import { useI18n } from '~/hooks/use-i18n'
@@ -10,9 +10,10 @@ type IndexProps = {
   quoteStatistics: QuoteStatistics
   availableYears: number[]
   selectedYear: number
+  closedQuotesByMonth: MonthlyData[]
 }
 
-function Index({ quoteStatistics }: IndexProps) {
+function Index({ quoteStatistics, closedQuotesByMonth }: IndexProps) {
   const { t } = useI18n()
 
   return (
@@ -57,6 +58,10 @@ function Index({ quoteStatistics }: IndexProps) {
           icon={<CircleCheckBigIcon className={'size-5'} />}
         />
       </div>
+      <Box className={'flex flex-col gap-4'}>
+        <h2 className={'text-lg font-semibold'}>{t('features.statistics.chart.title')}</h2>
+        <ClosedQuotesChart data={closedQuotesByMonth} />
+      </Box>
     </div>
   )
 }

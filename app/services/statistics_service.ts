@@ -80,4 +80,34 @@ export class StatisticsService {
       },
     }
   }
+
+  public async getClosedQuotesByMonth(year?: number) {
+    const userId = this.user.id
+    const currentYear = year || new Date().getFullYear()
+
+    const startDate = `${currentYear}-01-01`
+    const endDate = `${currentYear}-12-31`
+
+    const closedQuotes = await Quote.query()
+      .where('user_id', userId)
+      .where('status', QuoteStatus.CLOSED)
+      .whereBetween('date', [startDate, endDate])
+
+    const monthlyData = Array.from({ length: 12 }, (_, i) => ({
+      month: i + 1,
+      count: 0,
+      total: 0,
+    }))
+
+    closedQuotes.forEach((quote) => {
+      if (quote.date) {
+        const month = quote.date.month
+        const price = quote.taxIncluded ? quote.totalPriceWithVat : quote.totalPrice
+        monthlyData[month - 1].count++
+        monthlyData[month - 1].total += price
+      }
+    })
+
+    return monthlyData
+  }
 }
