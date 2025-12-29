@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon'
 import { BaseModel, beforeSave, belongsTo, column } from '@adonisjs/lucid/orm'
-import Company from '#models/company'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { compose } from '@adonisjs/core/helpers'
 import { withSearchable } from '#models/mixins/searchable'
@@ -37,9 +36,6 @@ export default class Contact extends compose(BaseModel, Searchable, Sortable) {
 
   @column()
   declare userId: number
-
-  @belongsTo(() => Company)
-  declare company: BelongsTo<typeof Company>
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>

@@ -12,7 +12,6 @@ export default class extends BaseSchema {
       table.string('last_name')
       table.string('full_name')
       table.string('email')
-      table.integer('company_id')
       table.integer('user_id')
     })
   }
