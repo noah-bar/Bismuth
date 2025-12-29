@@ -159,5 +159,13 @@
         "contact": "Contact"
       }
     }
+  },
+  "statistics": {
+    "stat-card": {
+      "sent": "Devis envoyés",
+      "accepted": "Devis acceptés",
+      "completed": "Devis terminés",
+      "invoiced": "Devis clôturés"
+    }
   }
 }

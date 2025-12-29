@@ -1,3 +1,6 @@
 {
-  "companies": {}
+  "companies": {},
+  "statistics": {
+    "title": "Statistiques"
+  }
 }
