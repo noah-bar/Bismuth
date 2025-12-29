@@ -2,11 +2,11 @@
   @slot('main')
     <div class="container">
       @!component('pdf/partials/header', { quote, title:  t('pdf.invoice.title') })
-      @!component('pdf/partials/meta', { quote })
+      @!component('pdf/partials/invoice_meta', { quote })
       <p class="bold" style="margin-top: 10px; margin-bottom: 10px;">{{quote.title}}</p>
 
-      <p>{{ t('pdf.offer.description.0') }}</p>
-      <p>{{ t('pdf.offer.description.1') }}</p>
+      <p>{{ t('pdf.invoice.description.0') }}</p>
+      <p>{{ t('pdf.invoice.description.1') }}</p>
       @!component('pdf/partials/quote_items', { quote })
       @!component('pdf/partials/general_conditions', { quote })
       @!component('pdf/partials/signature', { quote })

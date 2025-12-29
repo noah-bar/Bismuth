@@ -2,7 +2,7 @@
   @slot('main')
     <div class="container">
       @!component('pdf/partials/header', { quote, title:  t('pdf.offer.title') })
-      @!component('pdf/partials/meta', { quote })
+      @!component('pdf/partials/offer_meta', { quote })
       <p class="bold" style="margin-top: 10px; margin-bottom: 10px;">{{quote.title}}</p>
 
       <p>{{ t('pdf.offer.description.0') }}</p>

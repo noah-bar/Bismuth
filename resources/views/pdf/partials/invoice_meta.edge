@@ -1,0 +1,41 @@
+<div style="width: 100%; display:flex; justify-content: end; text-align: end">
+  <table>
+    <tbody>
+      <tr>
+        <td class="bold">{{ quote.user.companyName }}</td>
+      </tr>
+      <tr>
+        <td>{{ quote.user.address }}</td>
+      </tr>
+      <tr>
+        <td>{{ quote.user.postalCode }} {{ quote.user.city }}</td>
+      </tr>
+      <tr>
+        <td>{{ quote.user.phoneNumber }}</td>
+      </tr>
+      <tr>
+        <td>{{ quote.user.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<table>
+  <tbody>
+    <tr>
+      <td class="bold">{{ quote.company?.name || quote.contact.fullName }}</td>
+    </tr>
+    <tr>
+      <td>{{ quote.company?.address || quote.contact.email }}</td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+    <tr>
+      <td>{{ t('pdf.invoice.meta.order-number') }} {{ quote.orderNumber }}</td>
+    </tr>
+    <tr>
+      <td>{{ t('pdf.invoice.meta.date') }} {{ quote.invoiceDate?.toFormat("d.MM.yyyy") }}</td>
+    </tr>
+  </tbody>
+</table>
+
