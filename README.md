@@ -16,6 +16,7 @@ A modern quote management system built with AdonisJS 6 and React 19. Bismuth hel
 ## Tech Stack
 
 ### Backend
+
 - **Framework**: AdonisJS v6 with TypeScript
 - **Database**: SQLite with Lucid ORM
 - **Authentication**: Session-based auth with remember me tokens
@@ -23,6 +24,7 @@ A modern quote management system built with AdonisJS 6 and React 19. Bismuth hel
 - **PDF Generation**: Puppeteer with Edge.js templates
 
 ### Frontend
+
 - **Framework**: React 19 with TypeScript
 - **Rendering**: Inertia.js for server-side rendering
 - **Styling**: Tailwind CSS 4
@@ -32,6 +34,7 @@ A modern quote management system built with AdonisJS 6 and React 19. Bismuth hel
 - **Theme**: Dark mode support
 
 ### Development Tools
+
 - **Build Tool**: Vite 6
 - **Testing**: Japa test runner
 - **Code Quality**: ESLint, Prettier
@@ -45,42 +48,52 @@ A modern quote management system built with AdonisJS 6 and React 19. Bismuth hel
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd Bismuth
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Configure environment:
+
 ```bash
 cp .env.example .env
 ```
 
 4. Generate application key:
+
 ```bash
 node ace generate:key
 ```
 
 5. Run database migrations:
+
 ```bash
 node ace migration:run
 ```
 
 6. Create a user account:
+
 ```bash
 node ace create:user <firstName> <lastName> <email> [password]
 ```
+
 Example:
+
 ```bash
 node ace create:user John Doe john@example.com mypassword
 ```
+
 If password is omitted, a random password will be generated and displayed.
 
 7. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -142,7 +155,9 @@ Bismuth/
 ## Key Features Explained
 
 ### Quote Management
+
 Quotes support multiple statuses throughout their lifecycle:
+
 - **Draft**: Initial creation
 - **Sent**: Sent to client
 - **Accepted**: Client accepted the quote
@@ -151,14 +166,18 @@ Quotes support multiple statuses throughout their lifecycle:
 - **Closed**: Invoice sent and paid
 
 ### PDF Generation
+
 Generate professional documents:
+
 - **Offers**: Quote details with validity period (30 days)
 - **Invoices**: Invoice with payment terms (30 days)
 - Responsive layout for mobile viewing
 - Customizable with company logo and signature
 
 ### Statistics Dashboard
+
 Track business performance:
+
 - Count and total amount for sent, accepted, completed, and closed quotes
 - Monthly breakdown of closed quotes with bar charts
 - Filter by year
