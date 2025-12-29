@@ -97,6 +97,11 @@ export default class QuotesController {
     return response.redirect().back()
   }
 
+  public async destroy({ response, params }: HttpContext) {
+    await this.service.deleteQuote(params.id)
+    return response.redirect().withQs().back()
+  }
+
   public async offer({ params, view, request, response }: HttpContext) {
     const quote = await this.service.getQuote(params.id)
     await quote.load('company')
