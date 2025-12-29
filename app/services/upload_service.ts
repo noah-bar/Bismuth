@@ -1,8 +1,7 @@
 import { MultipartFile } from '@adonisjs/core/bodyparser'
-import app from '@adonisjs/core/services/app'
 import { cuid } from '@adonisjs/core/helpers'
-import * as fs from 'node:fs'
-import sharp from 'sharp'
+import fs from 'node:fs/promises'
+import drive from '@adonisjs/drive/services/main'
 
 export interface ImageResizeOptions {
   width?: number
@@ -12,113 +11,58 @@ export interface ImageResizeOptions {
 }
 
 export class UploadService {
-  private baseUploadPath = 'storage/uploads'
+  public async toBuffer(file: MultipartFile): Promise<Buffer<ArrayBufferLike>> {
+    return await fs.readFile(file.tmpPath!)
+  }
 
   public async uploadFile(file: MultipartFile): Promise<string> {
-    const uploadPath = app.makePath(this.baseUploadPath)
-    const fileName = `${cuid()}.${file.extname}`
-
-    await file.move(uploadPath, {
-      name: fileName,
-    })
-
-    if (!file.isValid) {
-      throw new Error(`Failed to upload file: ${file.errors.map((e) => e.message).join(', ')}`)
-    }
+    const fileName = `uploads/${cuid()}.${file.extname}`
+    await file.moveToDisk(fileName)
 
     return fileName
   }
 
-  public async deleteFile(fileName: string | null | undefined): Promise<void> {
-    if (!fileName) {
-      return
-    }
+  public async uploadBuffer(buffer: Buffer<ArrayBufferLike>, extname: string) {
+    const disk = drive.use()
+    const fileName = `uploads/${cuid()}.${extname}`
+    await disk.put(fileName, buffer)
+    return fileName
+  }
 
-    const filePath = app.makePath(this.baseUploadPath, fileName)
-
-    if (!fs.existsSync(filePath)) {
-      return
-    }
-
+  public async deleteFile(fileName: string): Promise<boolean> {
+    const disk = drive.use()
     try {
-      fs.unlinkSync(filePath)
+      await disk.delete(fileName)
+      return true
     } catch (error) {
-      console.error(`Failed to delete file ${fileName}:`, error)
+      return false
     }
   }
 
-  public async replaceFile(
-    oldFileName: string | null | undefined,
-    newFile: MultipartFile
-  ): Promise<string> {
+  public async replaceFile(oldFileName: string, newFile: MultipartFile): Promise<string> {
     const newFileName = await this.uploadFile(newFile)
     await this.deleteFile(oldFileName)
     return newFileName
   }
 
-  public async uploadImage(file: MultipartFile, options: ImageResizeOptions = {}): Promise<string> {
-    const uploadPath = app.makePath(this.baseUploadPath)
-    const fileName = `${cuid()}.webp`
-    const outputPath = `${uploadPath}/${fileName}`
-
-    const { width, height, fit = 'contain', quality = 90 } = options
-
-    await file.move(uploadPath, {
-      name: `temp_${cuid()}.${file.extname}`,
-    })
-
-    if (!file.isValid) {
-      throw new Error(`Failed to upload file: ${file.errors.map((e) => e.message).join(', ')}`)
-    }
-
-    const tempFilePath = file.filePath!
-
-    try {
-      await sharp(tempFilePath).resize(width, height, { fit }).webp({ quality }).toFile(outputPath)
-
-      fs.unlinkSync(tempFilePath)
-    } catch (error) {
-      if (fs.existsSync(tempFilePath)) {
-        fs.unlinkSync(tempFilePath)
-      }
-      throw new Error(`Failed to process image: ${error.message}`)
-    }
-
-    return fileName
-  }
-
-  public async replaceImage(
-    oldFileName: string | null | undefined,
-    newFile: MultipartFile,
-    options?: ImageResizeOptions
+  public async replaceBuffer(
+    oldFileName: string,
+    buffer: Buffer<ArrayBufferLike>,
+    extname: string
   ): Promise<string> {
-    const newFileName = await this.uploadImage(newFile, options)
+    const newFileName = await this.uploadBuffer(buffer, extname)
     await this.deleteFile(oldFileName)
     return newFileName
   }
 
-  public fileExists(fileName: string | null | undefined): boolean {
-    if (!fileName) {
-      return false
-    }
+  public async getFileAsBase64(fileName: string): Promise<string> {
+    const disk = drive.use()
+    const content = await disk.getBytes(fileName)
+    const buffer = Buffer.from(content)
+    const base64 = buffer.toString('base64')
 
-    const filePath = app.makePath(this.baseUploadPath, fileName)
-    return fs.existsSync(filePath)
-  }
-
-  public getFilePath(fileName: string): string {
-    return app.makePath(this.baseUploadPath, fileName)
-  }
-
-  public getFileAsBase64(fileName: string | null | undefined): string | null {
-    if (!fileName || !this.fileExists(fileName)) {
-      return null
-    }
-
-    const filePath = this.getFilePath(fileName)
-    const fileBuffer = fs.readFileSync(filePath)
-    const base64 = fileBuffer.toString('base64')
-    const mimeType = fileName.endsWith('.webp') ? 'image/webp' : 'image/png'
+    const extname = fileName.split('.').pop()?.toLowerCase()
+    const mimeType = `image/${extname}`
 
     return `data:${mimeType};base64,${base64}`
   }
