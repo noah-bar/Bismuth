@@ -1,6 +1,7 @@
 import { defineConfig } from '@adonisjs/inertia'
 import type { InferSharedProps } from '@adonisjs/inertia/types'
 import i18nManager from '@adonisjs/i18n/services/main'
+import packageJson from '../package.json' with { type: 'json' }
 
 const inertiaConfig = defineConfig({
   /**
@@ -12,6 +13,7 @@ const inertiaConfig = defineConfig({
    * Data that should be shared with all rendered pages
    */
   sharedData: {
+    appVersion: () => packageJson.version,
     user: (ctx) => ctx.inertia.always(() => ctx.auth?.user?.serialize()),
     i18n: (ctx) => {
       const userLanguages = ctx.params.locale
