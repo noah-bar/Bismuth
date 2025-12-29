@@ -1,23 +1,22 @@
-
 {
-    "name": "Bismuth",
-    "short_name": "Bismuth",
-    "description": "Bismuth",
-    "theme_color": "#ffffff",
-    "start_url": "/quotes",
-    "icons": [
-        {
-            "src": "/web-app-manifest-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "/web-app-manifest-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        }
-    ],
-    "display": "standalone"
+  "name": "Bismuth",
+  "short_name": "Bismuth",
+  "description": "Bismuth",
+  "theme_color": "#ffffff",
+  "start_url": "/quotes",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "display": "standalone"
 }
