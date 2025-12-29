@@ -6,7 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./inertia/*"]
-    }
+    },
+    "resolveJsonModule": true
   },
   "exclude": ["./inertia/**/*", "node_modules", "build"]
 }
