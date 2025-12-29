@@ -37,5 +37,26 @@
   "action-dropdown-menu": {
     "edit": "Modifier",
     "delete": "Supprimer"
+  },
+  "quote-steps": {
+    "quote-steps-dialog": {
+      "title": {
+        "draft": "Étape 1 - Brouillon",
+        "sent": "Étape 2 - Envoyé",
+        "accepted": "Étape 3 - Accepté",
+        "completed": "Étape 4 - Terminé"
+      },
+      "description": "Cliquer sur \"Suivant\" pour passer à l'étape suivante"
+    },
+    "next-button": "Suivant",
+    "previous-button": "Précédent",
+    "close-button": "Terminer",
+    "step-sent": {
+      "order-number": "N° commande",
+      "file": "Fichier"
+    },
+    "step-accepted": {
+      "date": "Date de la facture"
+    }
   }
 }
