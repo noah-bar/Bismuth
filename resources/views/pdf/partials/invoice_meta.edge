@@ -45,11 +45,13 @@
       <td>
       </td>
     </tr>
-    <tr>
-      <td>
-        {{ t('pdf.invoice.meta.order-number') }} {{ quote.orderNumber }}
-      </td>
-    </tr>
+    @if(quote.orderNumber)
+      <tr>
+        <td>
+          {{ t('pdf.invoice.meta.order-number') }} {{ quote.orderNumber }}
+        </td>
+      </tr>
+    @endif
     <tr>
       <td>
         {{ t('pdf.invoice.meta.date') }} {{ quote.invoiceDate?.toFormat("d.MM.yyyy") }}
