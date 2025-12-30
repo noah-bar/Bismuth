@@ -6,9 +6,10 @@ import { Quote, QuoteStatus } from '~/types/quote'
 
 type QuoteTabsProps = {
   className?: string
+  onChange?: (value: string) => void
   quote: Quote
 }
-export function QuoteTabs({ className, quote }: QuoteTabsProps) {
+export function QuoteTabs({ className, quote, onChange }: QuoteTabsProps) {
   const { t } = useI18n()
 
   const invoiceDisabled = [
@@ -20,7 +21,7 @@ export function QuoteTabs({ className, quote }: QuoteTabsProps) {
 
   return (
     <Box className={className}>
-      <Tabs defaultValue={'offer'} className="h-full flex flex-col">
+      <Tabs defaultValue={'offer'} onValueChange={onChange} className="h-full flex flex-col">
         <TabsList className={'mx-auto'}>
           <TabsTrigger value="offer">{t('features.quote.quote-tabs.tabs.offer')}</TabsTrigger>
           <TabsTrigger value="order" disabled={!quote.order}>

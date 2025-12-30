@@ -1,5 +1,5 @@
 import { QuoteMenubar, QuoteStatusBadge, QuoteStepsDialog, QuoteTabs } from '~/features/quote'
-import { ReactNode, useTransition } from 'react'
+import { ReactNode, useState, useTransition } from 'react'
 import { AppLayout } from '~/components/layouts/app-layout'
 import { Quote, QuoteStatus } from '~/types/quote'
 import { Box } from '~/components/shared/box'
@@ -12,9 +12,19 @@ type ShowProps = {
   quote: Quote
 }
 function Show({ quote }: ShowProps) {
+  const [selectedTab, setSelectedTab] = useState('offer')
   const [isDownloading, startIsDownloading] = useTransition()
   const handleDownloadPdf = () => {
-    startIsDownloading(async () => await downloadPdf(`/quotes/${quote.id}/offer`, quote.title))
+    startIsDownloading(async () => {
+      switch (selectedTab) {
+        case 'order':
+          return await downloadPdf(quote.order!, quote.title)
+        case 'invoice':
+          return await downloadPdf(`/quotes/${quote.id}/invoice`, quote.title)
+        default:
+          return await downloadPdf(`/quotes/${quote.id}/offer`, quote.title)
+      }
+    })
   }
 
   return (
@@ -23,7 +33,7 @@ function Show({ quote }: ShowProps) {
         <h1 className={'text-xl font-semibold'}>{quote.title}</h1>
         <QuoteStatusBadge status={quote.status} />
       </Box>
-      <QuoteTabs className={'flex-1'} quote={quote} />
+      <QuoteTabs className={'flex-1'} quote={quote} onChange={setSelectedTab} />
       <Box className={'flex justify-between items-center'}>
         <Button size={'icon'} onClick={handleDownloadPdf}>
           {isDownloading ? <Spinner /> : <DownloadIcon />}
