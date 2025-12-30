@@ -12,6 +12,7 @@ import { useI18n } from '~/hooks/use-i18n'
 import { useAuth } from '~/features/auth'
 import { Separator } from '~/components/ui/separator'
 import { toast } from 'sonner'
+import { sanitizeFormData } from '~/lib/utils'
 
 type ProfileFormProps = FormHTMLAttributes<HTMLFormElement> & {
   data: UpdateProfile
@@ -20,9 +21,20 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
   const { t } = useI18n()
   const { user } = useAuth()
   const form = useForm<UpdateProfile>({
-    ...data,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    postalCode: '',
+    city: '',
+    companyName: '',
     signature: undefined,
     companyIcon: undefined,
+    currentPassword: '',
+    newPassword: '',
+    newPassword_confirmation: '',
+    ...sanitizeFormData(data),
   })
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -36,9 +48,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
     form.patch(`/profiles/${user.id}`, {
       forceFormData: true,
       onFinish: () => {
-        form.setData('currentPassword', '')
-        form.setData('newPassword', '')
-        form.setData('newPassword_confirmation', '')
+        form.reset('currentPassword', 'newPassword', 'newPassword_confirmation')
       },
       onSuccess: () => {
         if (form.data.newPassword) {
@@ -163,7 +173,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             onChange={(e) => form.setData('companyIcon', e.target.files?.[0])}
           />
           <div className={'flex justify-center items-center'}>
-            <img src={user.companyIconUrl} className={'h-12.5'} />
+            <img alt={'companyIcon'} src={user.companyIconUrl} className={'h-12.5'} />
           </div>
         </FormControl>
         <FormControl error={form.errors.signature}>
@@ -175,7 +185,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             onChange={(e) => form.setData('signature', e.target.files?.[0])}
           />
           <div className={'flex justify-center items-center'}>
-            <img src={user.signatureUrl} className={'w-25'} />
+            <img alt={'signature'} src={user.signatureUrl} className={'w-25'} />
           </div>
         </FormControl>
       </FormRow>
