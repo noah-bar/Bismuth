@@ -11,6 +11,13 @@ type QuoteTabsProps = {
 export function QuoteTabs({ className, quote }: QuoteTabsProps) {
   const { t } = useI18n()
 
+  const invoiceDisabled = [
+    QuoteStatus.DRAFT,
+    QuoteStatus.REJECTED,
+    QuoteStatus.SENT,
+    QuoteStatus.ACCEPTED,
+  ].includes(quote.status)
+
   return (
     <Box className={className}>
       <Tabs defaultValue={'offer'} className="h-full flex flex-col">
@@ -19,38 +26,34 @@ export function QuoteTabs({ className, quote }: QuoteTabsProps) {
           <TabsTrigger value="order" disabled={!quote.order}>
             {t('features.quote.quote-tabs.tabs.order')}
           </TabsTrigger>
-          <TabsTrigger
-            value="invoice"
-            disabled={[
-              QuoteStatus.DRAFT,
-              QuoteStatus.REJECTED,
-              QuoteStatus.SENT,
-              QuoteStatus.ACCEPTED,
-            ].includes(quote.status)}
-          >
+          <TabsTrigger value="invoice" disabled={invoiceDisabled}>
             {t('features.quote.quote-tabs.tabs.invoice')}
           </TabsTrigger>
         </TabsList>
         <TabsContent value={'offer'} className="flex-1 flex justify-center">
           <iframe
             src={`/quotes/${quote.id}/offer`}
-            className="w-full max-w-[794px] h-full border rounded p-4 bg-white"
+            className="w-full max-w-198.5 h-full border rounded p-4 bg-white"
             title="Aperçu du devis"
           />
         </TabsContent>
         <TabsContent value={'order'} className="flex-1 flex justify-center">
-          <iframe
-            src={`/uploads/${quote.order}`}
-            className="w-full h-full border rounded p-4 bg-white"
-            title="Aperçu de la commande"
-          />
+          {quote.order && (
+            <iframe
+              src={`/uploads/${quote.order}`}
+              className="w-full h-full border rounded p-4 bg-white"
+              title="Aperçu de la commande"
+            />
+          )}
         </TabsContent>
         <TabsContent value={'invoice'} className="flex-1 flex justify-center">
-          <iframe
-            src={`/quotes/${quote.id}/invoice`}
-            className="w-full max-w-[794px] h-full border rounded p-4 bg-white"
-            title="Aperçu de la facture"
-          />
+          {!invoiceDisabled && (
+            <iframe
+              src={`/quotes/${quote.id}/invoice`}
+              className="w-full max-w-198.5 h-full border rounded p-4 bg-white"
+              title="Aperçu de la facture"
+            />
+          )}
         </TabsContent>
       </Tabs>
     </Box>
