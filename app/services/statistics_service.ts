@@ -50,7 +50,7 @@ export class StatisticsService {
         .whereBetween('date', [startDate, endDate]),
       Quote.query()
         .where('user_id', userId)
-        .whereNotNull('invoice_date')
+        .where('status', QuoteStatus.CLOSED)
         .whereBetween('date', [startDate, endDate]),
     ])
 
