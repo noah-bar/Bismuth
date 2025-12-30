@@ -15,6 +15,7 @@ import { NativeSelect, NativeSelectOption } from '~/components/ui/native-select'
 import { QuoteItems } from '~/features/quote/components/quote-items'
 import { Switch } from '~/components/ui/switch'
 import { Separator } from '~/components/ui/separator'
+import { sanitizeFormData } from '~/lib/utils'
 
 type QuoteFormProps = FormHTMLAttributes<HTMLFormElement> & {
   data: CreateQuote | UpdateQuote
@@ -26,7 +27,20 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
     contacts: Contact[]
     statuses: QuoteStatus[]
   }>().props
-  const form = useForm<CreateQuote | UpdateQuote>({ ...data, order: undefined })
+
+  const form = useForm<CreateQuote | UpdateQuote>({
+    title: '',
+    date: '',
+    version: 1,
+    companyId: 0,
+    contactId: 0,
+    currency: 'CHF',
+    status: QuoteStatus.DRAFT,
+    taxIncluded: false,
+    items: [],
+    ...sanitizeFormData(data),
+  })
+
   const id = 'id' in form.data ? form.data.id : undefined
   const editMode = !!id
   const formTitle = editMode

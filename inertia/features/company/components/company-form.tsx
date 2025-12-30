@@ -9,13 +9,20 @@ import { useForm } from '@inertiajs/react'
 import { FormEvent, FormHTMLAttributes } from 'react'
 import { BackButton } from '@/components/shared/back-button'
 import { CreateCompany, UpdateCompany } from '~/types/company'
+import { sanitizeFormData } from '~/lib/utils'
 
 type CompanyFormProps = FormHTMLAttributes<HTMLFormElement> & {
   data: CreateCompany | UpdateCompany
 }
-export function CompanyForm({ data, onSubmit, ...props }: CompanyFormProps) {
+export function CompanyForm({ data = {}, onSubmit, ...props }: CompanyFormProps) {
   const { t } = useI18n()
-  const form = useForm<CreateCompany | UpdateCompany>({ ...data })
+  const form = useForm<CreateCompany | UpdateCompany>({
+    name: '',
+    address: '',
+    postalCode: '',
+    city: '',
+    ...sanitizeFormData(data),
+  })
   const id = 'id' in form.data ? form.data.id : undefined
   const editMode = !!id
   const formTitle = editMode
@@ -83,7 +90,7 @@ export function CompanyForm({ data, onSubmit, ...props }: CompanyFormProps) {
           <Label htmlFor={'city'}>{t('features.company.company-form.fields.city')}</Label>
           <Input
             type={'text'}
-            value={form.data.city || ''}
+            value={form.data.city}
             onChange={(e) => form.setData('city', e.target.value)}
           />
         </FormControl>

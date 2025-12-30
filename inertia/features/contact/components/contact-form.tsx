@@ -9,13 +9,21 @@ import { useForm } from '@inertiajs/react'
 import { FormEvent, FormHTMLAttributes } from 'react'
 import { BackButton } from '@/components/shared/back-button'
 import { CreateContact, UpdateContact } from '~/types/contact'
+import { sanitizeFormData } from '~/lib/utils'
 
 type ContactFormProps = FormHTMLAttributes<HTMLFormElement> & {
   data: CreateContact | UpdateContact
 }
 export function ContactForm({ data, onSubmit, ...props }: ContactFormProps) {
   const { t } = useI18n()
-  const form = useForm<CreateContact | UpdateContact>({ ...data })
+
+  const form = useForm<CreateContact | UpdateContact>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    ...sanitizeFormData(data),
+  })
+
   const id = 'id' in form.data ? form.data.id : undefined
   const editMode = !!id
   const formTitle = editMode
