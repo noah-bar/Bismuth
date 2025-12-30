@@ -3,6 +3,7 @@
     "fields": {
       "email": "adresse e-mail",
       "password": "mot de passe",
+      "currentPassword": "mot de passe actuel",
       "city": "ville",
       "address": "adresse",
       "name": "nom",
@@ -14,11 +15,33 @@
       "version": "version",
       "status": "statut",
       "companyId": "société",
-      "contactId": "contact"
+      "contactId": "contact",
+      "newPassword": "nouveau mot de passe",
+      "newPassword_confirmation": "confirmation du nouveau mot de passe",
+      "phoneNumber": "numéro de téléphone",
+      "companyName": "nom de l'entreprise",
+      "companyIcon": "logo de l'entreprise",
+      "signature": "signature",
+      "description": "description",
+      "price": "prix",
+      "order": "ordre",
+      "orderNumber": "numéro de commande",
+      "taxIncluded": "TVA incluse"
     },
     "messages": {
       "required": "Le champ {field} doit être défini.",
-      "email": "L'adresse e-mail doit être valide"
+      "email": "L'adresse e-mail doit être valide",
+      "minLength": "Le champ {field} doit contenir au moins {min} caractères",
+      "maxLength": "Le champ {field} ne peut pas dépasser {max} caractères",
+      "mobile": "Le numéro de téléphone doit être valide",
+      "postalCode": "Le code postal doit être valide",
+      "confirmed": "Le champ {field} et sa confirmation ne correspondent pas",
+      "requiredIfExists": "Le champ {field} est requis quand {otherField} est présent",
+      "positive": "Le champ {field} doit être un nombre positif",
+      "decimal": "Le champ {field} doit être un nombre décimal valide",
+      "withoutDecimals": "Le champ {field} doit être un nombre entier",
+      "file.size": "Le fichier {field} ne doit pas dépasser {size}",
+      "file.extname": "Le fichier {field} doit être de type {extnames}"
     }
   }
 }

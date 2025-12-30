@@ -32,7 +32,11 @@
         "city": "Ville",
         "signature": "Signature",
         "companyName": "Nom de la société",
-        "companyIcon": "Icône de la société"
+        "companyIcon": "Icône de la société",
+        "changePassword": "Modifier le mot de passe",
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "newPasswordConfirmation": "Confirmation du nouveau mot de passe"
       }
     }
   },
