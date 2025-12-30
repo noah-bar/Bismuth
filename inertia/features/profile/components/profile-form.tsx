@@ -29,12 +29,12 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
     postalCode: '',
     city: '',
     companyName: '',
-    signature: undefined,
-    companyIcon: undefined,
     currentPassword: '',
     newPassword: '',
     newPassword_confirmation: '',
     ...sanitizeFormData(data),
+    signature: undefined,
+    companyIcon: undefined,
   })
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
