@@ -37,6 +37,9 @@
         "currentPassword": "Mot de passe actuel",
         "newPassword": "Nouveau mot de passe",
         "newPasswordConfirmation": "Confirmation du nouveau mot de passe"
+      },
+      "messages": {
+        "password-changed": "Votre mot de passe a été modifié avec succès"
       }
     }
   },

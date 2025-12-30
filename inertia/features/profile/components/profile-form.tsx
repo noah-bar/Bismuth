@@ -11,6 +11,7 @@ import { Input } from '~/components/ui/input'
 import { useI18n } from '~/hooks/use-i18n'
 import { useAuth } from '~/features/auth'
 import { Separator } from '~/components/ui/separator'
+import { toast } from 'sonner'
 
 type ProfileFormProps = FormHTMLAttributes<HTMLFormElement> & {
   data: UpdateProfile
@@ -38,6 +39,11 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
         form.setData('currentPassword', '')
         form.setData('newPassword', '')
         form.setData('newPassword_confirmation', '')
+      },
+      onSuccess: () => {
+        if (form.data.newPassword) {
+          toast.success(t('features.profile.profile-form.messages.password-changed'))
+        }
       },
     })
   }
