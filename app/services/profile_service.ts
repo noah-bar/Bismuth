@@ -18,7 +18,7 @@ export class ProfileService {
     profileOrId: number | User,
     data: Infer<typeof updateProfileValidator>
   ): Promise<User> {
-    const { signature, companyIcon, ...rest } = data
+    const { signature, companyIcon, newPassword, currentPassword, ...rest } = data
     const profile =
       typeof profileOrId === 'number' ? await User.findOrFail(profileOrId) : profileOrId
 
@@ -32,6 +32,12 @@ export class ProfileService {
       profile.companyIcon = await this.processAndUploadImage(companyIcon, profile.companyIcon, {
         height: 100,
       })
+    }
+
+    if (newPassword && currentPassword) {
+      await User.verifyCredentials(profile.email, currentPassword)
+      profile.password = newPassword
+      await profile.save()
     }
 
     return await profile.merge(rest).save()

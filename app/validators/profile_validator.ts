@@ -10,5 +10,12 @@ export const updateProfileValidator = vine.compile(
     companyName: vine.string().trim().use(capitalizeRule()).optional(),
     companyIcon: vine.file({ extnames: ['png', 'jpg', 'jpeg', 'webp'], size: '5mb' }).optional(),
     signature: vine.file({ extnames: ['png', 'jpg', 'jpeg', 'webp'], size: '5mb' }).optional(),
+    currentPassword: vine.string().optional().requiredIfExists('newPassword'),
+    newPassword: vine
+      .string()
+      .minLength(8)
+      .confirmed()
+      .optional()
+      .requiredIfExists('currentPassword'),
   })
 )
