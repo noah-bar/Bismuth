@@ -1,26 +1,40 @@
 <div style="width: 100%; display:flex; justify-content: end; text-align: end">
   <table>
     <tbody>
-      <tr>
-        <td class="bold">
-          {{ quote.user.companyName }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          {{ quote.user.address }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          {{ quote.user.postalCode }} {{ quote.user.city }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          {{ quote.user.phoneNumber }}
-        </td>
-      </tr>
+      @if(quote.user.companyName)
+        <tr>
+          <td class="bold">
+            {{ quote.user.companyName }}
+          </td>
+        </tr>
+      @elseif(quote.user.firstName && quote.user.lastName)
+        <tr>
+          <td class="bold">
+            {{ quote.user.firstName }} {{ quote.user.lastName }}
+          </td>
+        </tr>
+      @endif
+      @if(quote.user.address)
+        <tr>
+          <td>
+            {{ quote.user.address }}
+          </td>
+        </tr>
+      @endif
+      @if(quote.user.postalCode && quote.user.city)
+        <tr>
+          <td>
+            {{ quote.user.postalCode }} {{ quote.user.city }}
+          </td>
+        </tr>
+      @endif
+      @if(quote.user.phoneNumber)
+        <tr>
+          <td>
+            {{ quote.user.phoneNumber }}
+          </td>
+        </tr>
+      @endif
       <tr>
         <td>
           {{ quote.user.email }}
