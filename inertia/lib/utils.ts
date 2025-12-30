@@ -33,3 +33,12 @@ export async function downloadPdf(url: string, title: string) {
     document.body.removeChild(a)
   }
 }
+
+export const sanitizeFormData = <T extends Record<string, any>>(data: T): T => {
+  return Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [
+      key,
+      value === null || value === undefined ? '' : value,
+    ])
+  ) as T
+}
