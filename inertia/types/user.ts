@@ -25,5 +25,8 @@ export type UpdateProfile = Partial<
   > & {
     signature?: File
     companyIcon?: File
+    currentPassword?: string
+    newPassword?: string
+    newPassword_confirmation?: string
   }
 >

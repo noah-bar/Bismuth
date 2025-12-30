@@ -10,6 +10,7 @@ import { Label } from '@radix-ui/react-label'
 import { Input } from '~/components/ui/input'
 import { useI18n } from '~/hooks/use-i18n'
 import { useAuth } from '~/features/auth'
+import { Separator } from '~/components/ui/separator'
 
 type ProfileFormProps = FormHTMLAttributes<HTMLFormElement> & {
   data: UpdateProfile
@@ -33,6 +34,11 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
 
     form.patch(`/profiles/${user.id}`, {
       forceFormData: true,
+      onFinish: () => {
+        form.setData('currentPassword', '')
+        form.setData('newPassword', '')
+        form.setData('newPassword_confirmation', '')
+      },
     })
   }
 
@@ -151,7 +157,7 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             onChange={(e) => form.setData('companyIcon', e.target.files?.[0])}
           />
           <div className={'flex justify-center items-center'}>
-            <img src={user.companyIconUrl} className={'h-[50px]'} />
+            <img src={user.companyIconUrl} className={'h-12.5'} />
           </div>
         </FormControl>
         <FormControl error={form.errors.signature}>
@@ -163,8 +169,57 @@ export function ProfileForm({ data, onSubmit, ...props }: ProfileFormProps) {
             onChange={(e) => form.setData('signature', e.target.files?.[0])}
           />
           <div className={'flex justify-center items-center'}>
-            <img src={user.signatureUrl} className={'w-[100px]'} />
+            <img src={user.signatureUrl} className={'w-25'} />
           </div>
+        </FormControl>
+      </FormRow>
+      <div className="flex items-center flex-row gap-4">
+        <div className="font-semibold whitespace-nowrap">
+          {t('features.profile.profile-form.fields.changePassword')}
+        </div>
+        <Separator className="flex-1" />
+      </div>
+      <FormRow>
+        <FormControl
+          error={
+            'E_INVALID_CREDENTIALS' in form.errors
+              ? (form.errors.E_INVALID_CREDENTIALS as string)
+              : ''
+          }
+        >
+          <Label htmlFor={'currentPassword'}>
+            {t('features.profile.profile-form.fields.currentPassword')}
+          </Label>
+          <Input
+            type={'password'}
+            id={'currentPassword'}
+            value={form.data.currentPassword}
+            onChange={(e) => form.setData('currentPassword', e.target.value)}
+          />
+        </FormControl>
+      </FormRow>
+      <FormRow>
+        <FormControl error={form.errors.newPassword}>
+          <Label htmlFor={'newPassword'}>
+            {t('features.profile.profile-form.fields.newPassword')}
+          </Label>
+          <Input
+            type={'password'}
+            id={'newPassword'}
+            value={form.data.newPassword}
+            onChange={(e) => form.setData('newPassword', e.target.value)}
+          />
+        </FormControl>
+        <FormControl error={form.errors.newPassword_confirmation}>
+          <Label htmlFor={'newPassword_confirmation'}>
+            {t('features.profile.profile-form.fields.newPasswordConfirmation')}
+          </Label>
+          <Input
+            type={'password'}
+            id={'newPassword_confirmation'}
+            value={form.data.newPassword_confirmation}
+            onChange={(e) => form.setData('newPassword_confirmation', e.target.value)}
+          />
         </FormControl>
       </FormRow>
     </Form>
