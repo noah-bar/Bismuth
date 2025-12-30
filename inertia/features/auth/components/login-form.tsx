@@ -17,6 +17,8 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     password: '',
   })
 
+  const formEnabled = form.data.email && form.data.password
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     form.post('/login', {
@@ -65,7 +67,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
           />
         </FormControl>
       </FormRow>
-      <Button type="submit" disabled={form.processing}>
+      <Button type="submit" disabled={form.processing || !formEnabled}>
         {t('features.auth.login-form.buttons.submit')}
         {form.processing && <Spinner />}
       </Button>

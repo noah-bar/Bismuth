@@ -8,7 +8,7 @@ export default class SessionController {
 
   public async store({ request, auth, response }: HttpContext) {
     const { email, password } = request.only(['email', 'password'])
-    const user = await User.verifyCredentials(email.toLowerCase(), password)
+    const user = await User.verifyCredentials(email?.toLowerCase(), password)
 
     await auth.use().login(user, true)
 
