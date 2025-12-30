@@ -58,5 +58,6 @@
     "step-accepted": {
       "date": "Date de la facture"
     }
-  }
+  },
+  "back-button": "Retour"
 }

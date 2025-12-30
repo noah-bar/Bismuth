@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { useConfirm } from '@/hooks/use-confirm'
 import { Undo2Icon } from 'lucide-react'
 import { router } from '@inertiajs/react'
+import { useI18n } from '~/hooks/use-i18n'
 
 type BackButtonProps = {
   isDirty?: boolean
@@ -9,6 +10,7 @@ type BackButtonProps = {
 }
 export function BackButton({ isDirty = false, url }: BackButtonProps) {
   const { confirm } = useConfirm()
+  const { t } = useI18n()
 
   const handleClick = async () => {
     if (!isDirty || (await confirm())) {
@@ -23,7 +25,7 @@ export function BackButton({ isDirty = false, url }: BackButtonProps) {
   return (
     <Button type={'button'} variant="outline" onClick={handleClick}>
       <Undo2Icon className={'size-4'} />
-      Back
+      {t('components.back-button')}
     </Button>
   )
 }
