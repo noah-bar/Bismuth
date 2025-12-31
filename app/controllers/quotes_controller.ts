@@ -72,8 +72,8 @@ export default class QuotesController {
 
   public async store({ response, request }: HttpContext) {
     const payload = await request.validateUsing(createQuoteValidator)
-    await this.service.createQuote(payload)
-    return response.redirect().toRoute('quotes.index')
+    const quote = await this.service.createQuote(payload)
+    return response.redirect().toRoute('quotes.show', { id: quote.id })
   }
 
   public async edit({ inertia, params }: HttpContext) {
