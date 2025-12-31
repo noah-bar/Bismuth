@@ -13,7 +13,7 @@
       <p>
         {{ t('pdf.invoice.description.1') }}
       </p>
-      @!component('pdf/partials/quote_items', { quote })
+      @!component('pdf/partials/invoice_items', { quote })
       @!component('pdf/partials/general_conditions', { quote, type: 'invoice' })
       @!component('pdf/partials/signature', { quote })
     </div>

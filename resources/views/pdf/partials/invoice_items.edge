@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    @each(item in quote.offerItems)
+    @each(item in quote.invoiceItems)
       <tr>
         <td>
           <span class="bold">{{ item.title }}</span>
@@ -34,28 +34,28 @@
       <tr class="total-row">
         <td>
           {{ t('pdf.total-without-vat') }}
-          <span class="price-mobile">{{ quote.offerTotalPrice.toFixed(2) }} {{ quote.currency }}</span>
+          <span class="price-mobile">{{ quote.invoiceTotalPrice.toFixed(2) }} {{ quote.currency }}</span>
         </td>
         <td class="text-center price-column">
-          {{ quote.offerTotalPrice.toFixed(2) }} {{ quote.currency }}
+          {{ quote.invoiceTotalPrice.toFixed(2) }} {{ quote.currency }}
         </td>
       </tr>
       <tr class="total-row">
         <td>
           {{ t('pdf.vat') }}
-          <span class="price-mobile">{{ (quote.offerTotalPrice / 100 * 8.1).toFixed(2) }} {{ quote.currency }}</span>
+          <span class="price-mobile">{{ (quote.invoiceTotalPrice / 100 * 8.1).toFixed(2) }} {{ quote.currency }}</span>
         </td>
         <td class="text-center price-column">
-          {{ (quote.offerTotalPrice / 100 * 8.1).toFixed(2) }} {{ quote.currency }}
+          {{ (quote.invoiceTotalPrice / 100 * 8.1).toFixed(2) }} {{ quote.currency }}
         </td>
       </tr>
       <tr class="grand-total">
         <td>
           {{ t('pdf.total') }}
-          <span class="price-mobile">{{ quote.offerTotalPriceWithVat.toFixed(2) }} {{ quote.currency }}</span>
+          <span class="price-mobile">{{ quote.invoiceTotalPriceWithVat.toFixed(2) }} {{ quote.currency }}</span>
         </td>
         <td class="text-center price-column">
-          {{ quote.offerTotalPriceWithVat.toFixed(2) }} {{ quote.currency }}
+          {{ quote.invoiceTotalPriceWithVat.toFixed(2) }} {{ quote.currency }}
         </td>
       </tr>
     @else
@@ -63,11 +63,11 @@
         <td>
           <div class="w-full flex justify-between items-center">
             <span>{{ t('pdf.total') }}</span>
-            <span class="price-mobile">{{ quote.offerTotalPrice.toFixed(2) }} {{ quote.currency }}</span>
+            <span class="price-mobile">{{ quote.invoiceTotalPrice.toFixed(2) }} {{ quote.currency }}</span>
           </div>
         </td>
         <td class="text-center price-column">
-          {{ quote.offerTotalPrice.toFixed(2) }} {{ quote.currency }}
+          {{ quote.invoiceTotalPrice.toFixed(2) }} {{ quote.currency }}
         </td>
       </tr>
     @endif

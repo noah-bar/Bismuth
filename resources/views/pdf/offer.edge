@@ -13,7 +13,7 @@
       <p>
         {{ t('pdf.offer.description.1') }}
       </p>
-      @!component('pdf/partials/quote_items', { quote })
+      @!component('pdf/partials/offer_items', { quote })
       @!component('pdf/partials/general_conditions', { quote, type: 'offer' })
       @!component('pdf/partials/signature', { quote })
     </div>
