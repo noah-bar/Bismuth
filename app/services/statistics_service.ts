@@ -56,7 +56,7 @@ export class StatisticsService {
 
     const calculateTotal = (quotes: Quote[]) => {
       return quotes.reduce((sum, quote) => {
-        const price = quote.taxIncluded ? quote.totalPriceWithVat : quote.totalPrice
+        const price = quote.taxIncluded ? quote.invoiceTotalPriceWithVat : quote.invoiceTotalPrice
         return sum + price
       }, 0)
     }
@@ -102,7 +102,7 @@ export class StatisticsService {
     closedQuotes.forEach((quote) => {
       if (quote.date) {
         const month = quote.date.month
-        const price = quote.taxIncluded ? quote.totalPriceWithVat : quote.totalPrice
+        const price = quote.taxIncluded ? quote.invoiceTotalPriceWithVat : quote.invoiceTotalPrice
         monthlyData[month - 1].count++
         monthlyData[month - 1].total += price
       }
