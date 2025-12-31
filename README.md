@@ -5,10 +5,12 @@ A modern quote management system built with AdonisJS 6 and React 19. Bismuth hel
 ## Features
 
 - **Quote Management**: Create, edit, and manage quotes with multiple statuses (draft, sent, accepted, rejected, completed, closed)
+- **Separate Offer & Invoice Items**: Manage different items for offers and invoices independently with tabbed interface
 - **Company & Contact Management**: Organize clients with company and contact information
-- **PDF Generation**: Generate professional offers and invoices with customizable templates
+- **PDF Generation**: Generate professional offers and invoices with customizable templates and dynamic download
 - **Statistics Dashboard**: Track quote performance with interactive charts and metrics
-- **User Profiles**: Manage company information, signatures, and logos
+- **User Profiles**: Manage company information, signatures, logos, and password change functionality
+- **Toast Notifications**: Real-time feedback with success and error notifications
 - **Progressive Web App**: Install and use as a native app on mobile and desktop
 - **Responsive Design**: Optimized for mobile, tablet, and desktop devices
 - **Internationalization**: French language support with i18n
@@ -31,7 +33,8 @@ A modern quote management system built with AdonisJS 6 and React 19. Bismuth hel
 - **UI Components**: Radix UI primitives (Dialog, Dropdown, Tabs, etc.)
 - **Icons**: Lucide React
 - **Charts**: Recharts for data visualization
-- **Theme**: Dark mode support
+- **Notifications**: Sonner for toast notifications
+- **Theme**: Dark mode support with next-themes
 
 ### Development Tools
 
@@ -136,7 +139,11 @@ DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_password
 DB_DATABASE=app
+CHROMIUM_PATH=<optional-custom-chromium-path>
 ```
+
+**Optional Configuration:**
+- `CHROMIUM_PATH`: Custom path to Chromium executable for PDF generation (defaults to Puppeteer's bundled Chromium if not set)
 
 ## Available Scripts
 
@@ -153,14 +160,14 @@ DB_DATABASE=app
 ```
 Bismuth/
 ├── app/
-│   ├── controllers/       # HTTP controllers
-│   ├── models/           # Database models (User, Quote, Company, Contact)
-│   ├── services/         # Business logic services
-│   ├── validators/       # Request validators
-│   ├── middleware/       # HTTP middleware
-│   └── enums/           # TypeScript enums
+│   ├── controllers/    # HTTP controllers
+│   ├── models/         # Database models (User, Quote, Company, Contact)
+│   ├── services/       # Business logic services
+│   ├── validators/     # Request validators
+│   ├── middleware/     # HTTP middleware
+│   └── enums/          # TypeScript enums
 ├── database/
-│   └── migrations/      # Database migrations
+│   └── migrations/     # Database migrations
 ├── inertia/
 │   ├── app/            # React app entry points
 │   ├── pages/          # Inertia pages (Login, Quotes, Statistics, etc.)
@@ -188,6 +195,12 @@ Quotes support multiple statuses throughout their lifecycle:
 - **Completed**: Work completed
 - **Closed**: Invoice sent and paid
 
+Each quote can have separate items for offers and invoices, allowing you to:
+- Create an initial offer with specific items and pricing
+- Modify invoice items independently when work is completed
+- Sync invoice items from offer with one click
+- Track both offer and invoice totals separately
+
 ### PDF Generation
 
 Generate professional documents:
@@ -196,6 +209,7 @@ Generate professional documents:
 - **Invoices**: Invoice with payment terms (30 days)
 - Responsive layout for mobile viewing
 - Customizable with company logo and signature
+- Automatic calculation of totals with and without VAT
 
 ### Statistics Dashboard
 
