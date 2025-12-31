@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.decimal('total_price_with_vat').defaultTo(0)
+      table.decimal('offer_total_price_with_vat').defaultTo(0)
       table.string('order_number')
       table.string('order')
       table.date('invoice_date')
@@ -14,7 +14,7 @@ export default class extends BaseSchema {
 
   async down() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.dropColumn('total_price_with_vat')
+      table.dropColumn('offer_total_price_with_vat')
       table.dropColumn('order_number')
       table.dropColumn('order')
       table.dropColumn('invoice_date')
