@@ -36,7 +36,7 @@ export async function downloadPdf(url: string, title: string) {
 
 export const sanitizeFormData = <T extends Record<string, any>>(data: T): T => {
   return Object.fromEntries(
-    Object.entries(data).map(([key, value]) => [
+    Object.entries(data || {}).map(([key, value]) => [
       key,
       value === null || value === undefined ? '' : value,
     ])

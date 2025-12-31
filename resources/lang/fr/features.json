@@ -164,6 +164,9 @@
         "description": "Description",
         "company": "Société",
         "contact": "Contact"
+      },
+      "messages": {
+        "sync-invoice": "Voulez-vous remettre la facture identique à l’offre ?"
       }
     }
   },

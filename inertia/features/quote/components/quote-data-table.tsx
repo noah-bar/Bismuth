@@ -77,7 +77,8 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
             <DataTableCell>{quote.title}</DataTableCell>
             <DataTableCell>{formatDate(quote.date)}</DataTableCell>
             <DataTableCell>
-              {quote.taxIncluded ? quote.totalPriceWithVat : quote.totalPrice} {quote.currency}
+              {quote.taxIncluded ? quote.offerTotalPriceWithVat : quote.offerTotalPrice}{' '}
+              {quote.currency}
             </DataTableCell>
             <DataTableCell>{quote.company?.name}</DataTableCell>
             <DataTableCell>{quote.contact.fullName}</DataTableCell>

@@ -16,12 +16,17 @@ import { QuoteItems } from '~/features/quote/components/quote-items'
 import { Switch } from '~/components/ui/switch'
 import { Separator } from '~/components/ui/separator'
 import { sanitizeFormData } from '~/lib/utils'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs'
+import { Button } from '~/components/ui/button'
+import { RotateCcwIcon } from 'lucide-react'
+import { useConfirm } from '~/hooks/use-confirm'
 
 type QuoteFormProps = FormHTMLAttributes<HTMLFormElement> & {
   data: CreateQuote | UpdateQuote
 }
 export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
   const { t } = useI18n()
+  const { confirm } = useConfirm()
   const { companies, contacts, statuses } = usePage<{
     companies: Company[]
     contacts: Contact[]
@@ -37,7 +42,8 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
     currency: 'CHF',
     status: QuoteStatus.DRAFT,
     taxIncluded: false,
-    items: [],
+    offerItems: [],
+    invoiceItems: [],
     ...sanitizeFormData(data),
   })
 
@@ -47,7 +53,16 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
     ? t('features.quote.quote-form.title.edit')
     : t('features.quote.quote-form.title.create')
 
-  const totalPrice = form.data.items?.reduce((acc, item) => (acc += item.price), 0) || 0
+  const totalPrice = form.data.offerItems?.reduce((acc, item) => acc + item.price, 0) || 0
+  const invoiceTotalPrice = form.data.invoiceItems?.reduce((acc, item) => acc + item.price, 0) || 0
+  const offerAndInvoiceAreSame =
+    JSON.stringify(form.data.offerItems) === JSON.stringify(form.data.invoiceItems)
+
+  const handleResetInvoice = async () => {
+    if(await confirm({ description: t('features.quote.quote-form.messages.sync-invoice') })) {
+      form.setData('invoiceItems', form.data.offerItems)
+    }
+  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -175,18 +190,48 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
           <Label htmlFor={'taxIncluded'}>{t('features.quote.quote-form.fields.taxIncluded')}</Label>
         </FormControl>
       </FormRow>
-      <div className="flex items-center flex-row gap-4">
-        <div className="font-semibold whitespace-nowrap">
-          {t('features.quote.quote-form.elements')} ({form.data.items?.length || 0}) (
-          {t('features.quote.quote-form.total')} {totalPrice} {form.data.currency})
+      <Tabs defaultValue={'offer'}>
+        <div className={'flex justify-between items-center gap-4'}>
+          <TabsList className={'w-full md:w-62'}>
+            <TabsTrigger value="offer">{t('features.quote.quote-tabs.tabs.offer')}</TabsTrigger>
+            <TabsTrigger value="invoice">{t('features.quote.quote-tabs.tabs.invoice')}</TabsTrigger>
+          </TabsList>
+          <Button size={'icon'} onClick={handleResetInvoice} disabled={offerAndInvoiceAreSame}>
+            <RotateCcwIcon />
+          </Button>
         </div>
-        <Separator className="flex-1" />
-      </div>
-      <QuoteItems
-        value={form.data.items || []}
-        onChange={(e) => form.setData('items', e)}
-        errors={form.errors}
-      />
+        <TabsContent value={'offer'}>
+          <div className="flex items-center flex-row gap-4">
+            <div className="font-semibold whitespace-nowrap">
+              {t('features.quote.quote-form.elements')} ({form.data.offerItems?.length || 0}) (
+              {t('features.quote.quote-form.total')} {totalPrice} {form.data.currency})
+            </div>
+            <Separator className="flex-1" />
+          </div>
+          <QuoteItems
+            value={form.data.offerItems || []}
+            onChange={(e) => {
+              form.setData('offerItems', e)
+              if (offerAndInvoiceAreSame) form.setData('invoiceItems', e)
+            }}
+            errors={form.errors}
+          />
+        </TabsContent>
+        <TabsContent value={'invoice'}>
+          <div className="flex items-center flex-row gap-4">
+            <div className="font-semibold whitespace-nowrap">
+              {t('features.quote.quote-form.elements')} ({form.data.invoiceItems?.length || 0}) (
+              {t('features.quote.quote-form.total')} {invoiceTotalPrice} {form.data.currency})
+            </div>
+            <Separator className="flex-1" />
+          </div>
+          <QuoteItems
+            value={form.data.invoiceItems || []}
+            onChange={(e) => form.setData('invoiceItems', e)}
+            errors={form.errors}
+          />
+        </TabsContent>
+      </Tabs>
     </Form>
   )
 }

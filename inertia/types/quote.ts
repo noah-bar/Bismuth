@@ -32,9 +32,12 @@ export type Quote = {
   orderNumber?: string
   order?: string
   invoiceDate?: string
-  items: QuoteItem[]
-  totalPrice: number
-  totalPriceWithVat: number
+  offerItems: QuoteItem[]
+  invoiceItems: QuoteItem[]
+  offerTotalPrice: number
+  offerTotalPriceWithVat: number
+  invoiceTotalPrice: number
+  invoiceTotalPriceWithVat: number
   createdAt: string
   updatedAt: string
 }
