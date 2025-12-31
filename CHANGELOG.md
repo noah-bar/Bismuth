@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2025-12-31
+
+### Added
+- Add tabs to manage separate offer and invoice items in quotes
+- Add auto-resize to quote item description textarea
+- Add dynamic PDF download based on selected tab
+- Add toast notification system with success messages
+- Add password change functionality to profile page
+- Add sanitizeFormData helper to handle null values in forms
+- Add French translations for password change, validators, and back button
+- Add form validation and safe email handling in login
+- Add size prop and improve native-select styling
+- Add configurable chromium path and optimize browser args for PDF generation
+
+### Changed
+- Split quote items template into separate offer and invoice templates
+- Update models and validators for separate offer and invoice items
+- Separate offer and invoice items in database schema
+
+### Fixed
+- Redirect to quote detail page after creation instead of index
+- Use invoice totals for statistics calculations
+- Ensure signature and icon fields override sanitized data in profile
+- Prevent rendering iframes when content unavailable
+- Add conditional rendering for optional user fields in PDF
+- Allow nullable optional fields in profile validator
+- Add default values and improve password reset handling
+- Initialize form fields with default values to prevent errors
+- Hide order number row when empty in invoice template
+- Filter quotes by closed status instead of invoice date in statistics
+- Change native select wrapper width from fit to full
+- Add foreground color to select options and optgroups
+
 ## [1.0.2] - 2025-12-29
 
 ### Added
@@ -140,7 +173,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add sharp package for image processing
 - Add puppeteer dependency
 
-[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/hex-tech/bismuth/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/hex-tech/bismuth/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/hex-tech/bismuth/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/hex-tech/bismuth/releases/tag/v1.0.0
