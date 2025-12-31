@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import { QuoteItem as TQuoteItem } from '~/types/quote'
 import { FormRow } from '~/components/shared/form-row'
 import { FormControl } from '~/components/shared/form-control'
@@ -120,6 +121,15 @@ export function QuoteItem({
   errors = {},
 }: QuoteItemProps) {
   const { t } = useI18n()
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    const textarea = textareaRef.current
+    if (textarea) {
+      textarea.style.height = 'auto'
+      textarea.style.height = `${textarea.scrollHeight}px`
+    }
+  }, [item.description])
 
   return (
     <div className={'flex gap-4'}>
@@ -146,10 +156,12 @@ export function QuoteItem({
           <FormControl error={errors.description}>
             <Label>{t('features.quote.quote-form.fields.description')}</Label>
             <Textarea
+              ref={textareaRef}
               id="description"
               name="description"
               value={item.description}
               onChange={(e) => onChange?.({ ...item, description: e.target.value })}
+              className="resize-none overflow-hidden"
             />
           </FormControl>
         </FormRow>
