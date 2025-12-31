@@ -45,6 +45,7 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
     offerItems: [],
     invoiceItems: [],
     ...sanitizeFormData(data),
+    order: undefined,
   })
 
   const id = 'id' in form.data ? form.data.id : undefined
