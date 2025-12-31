@@ -21,6 +21,7 @@ export const createQuoteValidator = vine.compile(
       .positive()
       .withoutDecimals()
       .exists(async (db, value) => {
+        if (!value) return true
         const user = await db.from('companies').where('id', value).first()
         return user !== null
       })
@@ -30,11 +31,18 @@ export const createQuoteValidator = vine.compile(
       .positive()
       .withoutDecimals()
       .exists(async (db, value) => {
-        if (!value) return true
         const user = await db.from('contacts').where('id', value).first()
         return user !== null
       }),
-    items: vine.array(
+    offerItems: vine.array(
+      vine.object({
+        title: vine.string().trim(),
+        description: vine.string().trim().optional(),
+        price: vine.number().positive().decimal([0, 2]),
+        order: vine.number().withoutDecimals(),
+      })
+    ),
+    invoiceItems: vine.array(
       vine.object({
         title: vine.string().trim(),
         description: vine.string().trim().optional(),
@@ -82,7 +90,17 @@ export const updateQuoteValidator = vine.compile(
         return user !== null
       })
       .optional(),
-    items: vine
+    offerItems: vine
+      .array(
+        vine.object({
+          title: vine.string().trim().minLength(1).optional(),
+          description: vine.string().trim().optional(),
+          price: vine.number().positive().decimal([0, 2]).optional(),
+          order: vine.number().withoutDecimals().optional(),
+        })
+      )
+      .optional(),
+    invoiceItems: vine
       .array(
         vine.object({
           title: vine.string().trim().minLength(1).optional(),

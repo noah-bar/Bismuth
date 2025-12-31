@@ -28,19 +28,19 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare email: string
 
   @column()
-  declare city: string
+  declare city: string | null
 
   @column()
-  declare address: string
+  declare address: string | null
 
   @column()
-  declare postalCode: string
+  declare postalCode: string | null
 
   @column()
-  declare phoneNumber: string
+  declare phoneNumber: string | null
 
   @column()
-  declare companyName: string
+  declare companyName: string | null
 
   @column()
   declare signature: string

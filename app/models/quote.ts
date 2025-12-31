@@ -12,12 +12,12 @@ import { QuoteStatus } from '#enums/quote_status'
 const Searchable = withSearchable([
   'title',
   'date',
-  'totalPrice',
+  'offerTotalPrice',
   'company.name',
   'contact.fullName',
 ])
 const Sortable = withSortable(
-  ['title', 'date', 'totalPrice', 'status', 'company.name', 'contact.fullName'],
+  ['title', 'date', 'offerTotalPrice', 'status', 'company.name', 'contact.fullName'],
   'title',
   'asc'
 )
@@ -48,7 +48,19 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
     prepare: (value: any) => JSON.stringify(value),
     consume: (value: string) => JSON.parse(value),
   })
-  declare items: Array<{
+  declare offerItems: Array<{
+    title?: string
+    description?: string
+    price?: number
+    order?: number
+    [key: string]: any
+  }>
+
+  @column({
+    prepare: (value: any) => JSON.stringify(value),
+    consume: (value: string) => JSON.parse(value),
+  })
+  declare invoiceItems: Array<{
     title?: string
     description?: string
     price?: number
@@ -59,12 +71,22 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
   @column({
     consume: (value: string) => Number(value),
   })
-  declare totalPrice: number
+  declare offerTotalPrice: number
 
   @column({
     consume: (value: string) => Number(value),
   })
-  declare totalPriceWithVat: number
+  declare offerTotalPriceWithVat: number
+
+  @column({
+    consume: (value: string) => Number(value),
+  })
+  declare invoiceTotalPrice: number
+
+  @column({
+    consume: (value: string) => Number(value),
+  })
+  declare invoiceTotalPriceWithVat: number
 
   @column()
   declare userId: number
@@ -101,11 +123,18 @@ export default class Quote extends compose(BaseModel, Searchable, Sortable) {
 
   @beforeSave()
   public static async calculateTotalPrice(quote: Quote) {
-    if (quote.$dirty.items) {
-      const subtotal = quote.items.reduce((sum, item) => sum + (item.price || 0), 0)
+    if (quote.$dirty.offerItems) {
+      const subtotal = quote.offerItems.reduce((sum, item) => sum + (item.price || 0), 0)
 
-      quote.totalPrice = subtotal
-      quote.totalPriceWithVat = subtotal * 1.081
+      quote.offerTotalPrice = subtotal
+      quote.offerTotalPriceWithVat = subtotal * 1.081
+    }
+
+    if (quote.$dirty.invoiceItems) {
+      const subtotal = quote.invoiceItems.reduce((sum, item) => sum + (item.price || 0), 0)
+
+      quote.invoiceTotalPrice = subtotal
+      quote.invoiceTotalPriceWithVat = subtotal * 1.081
     }
   }
 
