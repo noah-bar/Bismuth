@@ -143,6 +143,7 @@ CHROMIUM_PATH=<optional-custom-chromium-path>
 ```
 
 **Optional Configuration:**
+
 - `CHROMIUM_PATH`: Custom path to Chromium executable for PDF generation (defaults to Puppeteer's bundled Chromium if not set)
 
 ## Available Scripts
@@ -196,6 +197,7 @@ Quotes support multiple statuses throughout their lifecycle:
 - **Closed**: Invoice sent and paid
 
 Each quote can have separate items for offers and invoices, allowing you to:
+
 - Create an initial offer with specific items and pricing
 - Modify invoice items independently when work is completed
 - Sync invoice items from offer with one click

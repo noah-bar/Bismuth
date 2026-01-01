@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2025-12-31
 
 ### Added
+
 - Add tabs to manage separate offer and invoice items in quotes
 - Add auto-resize to quote item description textarea
 - Add dynamic PDF download based on selected tab
@@ -22,11 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add configurable chromium path and optimize browser args for PDF generation
 
 ### Changed
+
 - Split quote items template into separate offer and invoice templates
 - Update models and validators for separate offer and invoice items
 - Separate offer and invoice items in database schema
 
 ### Fixed
+
 - Redirect to quote detail page after creation instead of index
 - Use invoice totals for statistics calculations
 - Ensure signature and icon fields override sanitized data in profile
@@ -43,33 +46,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.2] - 2025-12-29
 
 ### Added
+
 - Add custom style prop support with safe area handling to sidebar
 - Add safe area padding for top and bottom insets to sidebar
 - Add safe area support for notched devices in PWA
 
 ### Changed
+
 - Remove unused ImageResizeOptions interface from services
 
 ### Fixed
+
 - Handle null signature in base64 conversion for user
 - Convert decimal fields to number for mysql compatibility in quote
 
 ## [1.0.1] - 2025-12-29
 
 ### Added
+
 - Enhance HTML metadata and mobile support
 - Migrate database from SQLite to MySQL
 
 ### Fixed
+
 - Spread form data to prevent reactivity issues in company and contact forms
 - Remove stray character from manifest link in layout
 
 ### Changed
+
 - Replace better-sqlite3 with mysql2 dependency
 
 ## [1.0.0] - 2025-12-29
 
 ### Added
+
 - Display app version in header
 - Comprehensive project documentation (README.md)
 - Create user CLI command
@@ -115,6 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AdonisJS project initialization
 
 ### Changed
+
 - Format files with Prettier (backend, frontend, edge templates, manifest)
 - Translate chart config label to French
 - Update h2 to h3 for chart title in statistics
@@ -143,6 +154,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrate company controller to use service layer
 
 ### Fixed
+
 - Use primary color variable for chart bars
 - Normalize email to lowercase on login
 - Allow null companyId in Quote model
@@ -158,6 +170,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow iframe embedding from same origin
 
 ### Chore
+
 - Enable JSON module resolution in tsconfig
 - Update package name and version to 0.1.0
 - Add recharts for data visualization
