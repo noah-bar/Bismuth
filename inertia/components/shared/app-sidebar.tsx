@@ -23,7 +23,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className={'h-[50px] border-b border-border'}>
+      <SidebarHeader className={'h-12.5 border-b border-border'}>
         <AppLogo />
       </SidebarHeader>
       <SidebarContent>
@@ -66,7 +66,7 @@ export function AppSidebar() {
         </SidebarGroup>
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter className={'h-[50px] border-t border-border'}>
+      <SidebarFooter className={'h-12.5 border-t border-border'}>
         <div className={'flex items-center justify-between'}>
           {user.firstName} {user.lastName}
           <div className={'flex items-center justify-center gap-2'}>
