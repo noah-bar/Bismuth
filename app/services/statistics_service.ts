@@ -19,6 +19,7 @@ export class StatisticsService {
       .orderBy('date', 'desc')
 
     const years = new Set<number>()
+    years.add(new Date().getFullYear())
     quotes.forEach((quote) => {
       if (quote.date) {
         years.add(quote.date.year)
