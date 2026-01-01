@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-01-01
+
+### Fixed
+
+- Close mobile menu on navigation link click in sidebar
+- Include current year in available years list in statistics
+- Reset order field in quote form initialization
+
+### Chore
+
+- Format code with prettier
+- Use Tailwind h-12.5 instead of arbitrary height value in sidebar
+- Update package-lock.json
+- Add blank lines for better markdown formatting in documentation
+- Update documentation for v1.1.0 features
+
 ## [1.1.0] - 2025-12-31
 
 ### Added
@@ -186,7 +202,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add sharp package for image processing
 - Add puppeteer dependency
 
-[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/hex-tech/bismuth/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/hex-tech/bismuth/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/hex-tech/bismuth/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/hex-tech/bismuth/compare/v1.0.0...v1.0.1
