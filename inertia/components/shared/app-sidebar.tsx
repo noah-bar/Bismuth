@@ -9,6 +9,7 @@ import {
   SidebarHeader,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@/components/ui/sidebar'
 import { LogoutButton, useAuth } from '@/features/auth'
 import { useI18n } from '@/hooks/use-i18n'
@@ -20,6 +21,13 @@ export function AppSidebar() {
   const { user } = useAuth()
   const { t } = useI18n()
   const { url } = usePage()
+  const { setOpenMobile, isMobile } = useSidebar()
+
+  const handleLinkClick = () => {
+    if (isMobile) {
+      setOpenMobile(false)
+    }
+  }
 
   return (
     <Sidebar>
@@ -32,7 +40,7 @@ export function AppSidebar() {
           <SidebarGroupContent className={'flex flex-col gap-1'}>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={url.includes('/statistics')}>
-                <Link href={'/statistics'}>
+                <Link href={'/statistics'} onClick={handleLinkClick}>
                   <ChartPieIcon className={'size-4'} />
                   {t('components.app-sidebar.items.statistics')}
                 </Link>
@@ -40,7 +48,7 @@ export function AppSidebar() {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={url.includes('/quotes')}>
-                <Link href={'/quotes'}>
+                <Link href={'/quotes'} onClick={handleLinkClick}>
                   <FileTextIcon className={'size-4'} />
                   {t('components.app-sidebar.items.quotes')}
                 </Link>
@@ -48,7 +56,7 @@ export function AppSidebar() {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={url.includes('/companies')}>
-                <Link href={'/companies'}>
+                <Link href={'/companies'} onClick={handleLinkClick}>
                   <Building2Icon className={'size-4'} />
                   {t('components.app-sidebar.items.companies')}
                 </Link>
@@ -56,7 +64,7 @@ export function AppSidebar() {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={url.includes('/contacts')}>
-                <Link href={'/contacts'}>
+                <Link href={'/contacts'} onClick={handleLinkClick}>
                   <UserPlusIcon className={'size-4'} />
                   {t('components.app-sidebar.items.contacts')}
                 </Link>
