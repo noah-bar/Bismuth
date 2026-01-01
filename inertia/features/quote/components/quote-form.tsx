@@ -60,7 +60,7 @@ export function QuoteForm({ data, onSubmit, ...props }: QuoteFormProps) {
     JSON.stringify(form.data.offerItems) === JSON.stringify(form.data.invoiceItems)
 
   const handleResetInvoice = async () => {
-    if(await confirm({ description: t('features.quote.quote-form.messages.sync-invoice') })) {
+    if (await confirm({ description: t('features.quote.quote-form.messages.sync-invoice') })) {
       form.setData('invoiceItems', form.data.offerItems)
     }
   }
