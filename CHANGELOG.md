@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-01-02
+
+### Added
+
+- Add header with logo, version and theme toggle to guest layout
+- Add id prop support to SafeArea component
+- Add bismuth background pattern utility class
+- Add rate limiting to login endpoint
+- Add rate limit error handling and display on login
+
+### Changed
+
+- Enable Content Security Policy with strict directives
+- Enable Puppeteer sandbox mode for improved security
+- Restrict CORS to allowed origins only
+- Adjust padding structure in guest layout
+
+### Fixed
+
+- Move background pattern to main content area only
+- Add background and rounded styling to login form
+- Allow self-hosted iframes in CSP
+- Update sort key from totalPrice to offerTotalPrice in quotes
+
+### Chore
+
+- Add @adonisjs/limiter dependency
+- Register limiter provider and add environment variables
+- Update package-lock.json dependencies
+
 ## [1.1.1] - 2026-01-01
 
 ### Fixed
@@ -202,7 +232,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add sharp package for image processing
 - Add puppeteer dependency
 
-[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/hex-tech/bismuth/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/hex-tech/bismuth/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/hex-tech/bismuth/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/hex-tech/bismuth/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/hex-tech/bismuth/compare/v1.0.1...v1.0.2
