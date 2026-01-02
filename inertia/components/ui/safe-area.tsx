@@ -1,12 +1,13 @@
-import { ReactNode } from 'react'
+import { CSSProperties, ReactNode } from 'react'
 
 export type SafeAreaProps = {
   children?: ReactNode
+  id?: string
   className?: string
 }
 
-export function SafeArea({ children, className }: SafeAreaProps) {
-  const styles: React.CSSProperties = {
+export function SafeArea({ id, children, className }: SafeAreaProps) {
+  const styles: CSSProperties = {
     paddingTop: 'env(safe-area-inset-top)',
     paddingBottom: 'env(safe-area-inset-bottom)',
     paddingLeft: 'env(safe-area-inset-left)',
@@ -14,7 +15,7 @@ export function SafeArea({ children, className }: SafeAreaProps) {
   }
 
   return (
-    <div className={className} style={styles}>
+    <div id={id} className={className} style={styles}>
       {children}
     </div>
   )
