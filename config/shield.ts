@@ -14,7 +14,7 @@ const shieldConfig = defineConfig({
       imgSrc: ["'self'", 'data:', 'blob:'],
       fontSrc: ["'self'"],
       connectSrc: ["'self'", 'ws://localhost:*', 'wss://localhost:*'],
-      frameSrc: ["'none'"],
+      frameSrc: ["'self'"],
       objectSrc: ["'none'"],
     },
     reportOnly: false,
