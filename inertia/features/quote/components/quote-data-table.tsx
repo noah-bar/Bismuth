@@ -56,7 +56,7 @@ export function QuoteDataTable({ data, className }: QuoteDataTableProps) {
           <SortableDataTableHead sortKey={'date'}>
             {t('features.quote.quote-data-table.headers.date')}
           </SortableDataTableHead>
-          <SortableDataTableHead sortKey={'totalPrice'}>
+          <SortableDataTableHead sortKey={'offerTotalPrice'}>
             {t('features.quote.quote-data-table.headers.totalPrice')}
           </SortableDataTableHead>
           <SortableDataTableHead sortKey={'company.name'}>
