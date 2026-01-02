@@ -11,7 +11,7 @@ export type GuessLayoutProps = {
 export function GuessLayout({ children }: GuessLayoutProps) {
   return (
     <RootLayout>
-      <SafeArea className={'flex flex-col h-screen w-full bg-bismuth bg-background'}>
+      <SafeArea className={'flex flex-col h-screen w-full bg-background'}>
         <header className={'w-full h-14 bg-background border-border border-b px-4'}>
           <div className={'flex justify-between h-full container mx-auto'}>
             <AppLogo className={'w-auto'} />
@@ -21,7 +21,7 @@ export function GuessLayout({ children }: GuessLayoutProps) {
             </div>
           </div>
         </header>
-        <main className={'flex-1'}>{children}</main>
+        <main className={'flex-1 bg-bismuth'}>{children}</main>
       </SafeArea>
     </RootLayout>
   )
