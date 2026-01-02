@@ -8,7 +8,7 @@ export type GuessLayoutProps = {
 export function GuessLayout({ children }: GuessLayoutProps) {
   return (
     <RootLayout>
-      <SafeArea className={'h-screen w-full bg-background p-4'}>{children}</SafeArea>
+      <SafeArea className={'h-screen w-full bg-background'}>{children}</SafeArea>
     </RootLayout>
   )
 }
