@@ -26,6 +26,11 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     })
   }
 
+  const loginError =
+    ('E_INVALID_CREDENTIALS' in form.errors && (form.errors.E_INVALID_CREDENTIALS as string)) ||
+    ('E_TOO_MANY_REQUESTS' in form.errors && (form.errors.E_TOO_MANY_REQUESTS as string)) ||
+    ''
+
   return (
     <form className={cn('flex flex-col gap-4', className)} onSubmit={handleSubmit} {...props}>
       <div className={'flex flex-col items-center justify-center gap-2 text-center'}>
@@ -38,13 +43,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
         <span className={'text-muted-foreground'}>{t('features.auth.login-form.subtitle')}</span>
       </div>
       <FormRow>
-        <FormControl
-          error={
-            'E_INVALID_CREDENTIALS' in form.errors
-              ? (form.errors.E_INVALID_CREDENTIALS as string)
-              : ''
-          }
-        >
+        <FormControl error={loginError}>
           <Label htmlFor={'email'}>{t('features.auth.login-form.fields.email.label')}</Label>
           <Input
             type={'email'}

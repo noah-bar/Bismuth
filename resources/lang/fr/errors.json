@@ -1,3 +1,4 @@
 {
-  "E_INVALID_CREDENTIALS": "Informations d'identification non valides."
+  "E_INVALID_CREDENTIALS": "Informations d'identification non valides.",
+  "E_TOO_MANY_REQUESTS": "Trop de requêtes. Veuillez réessayer plus tard."
 }

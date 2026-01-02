@@ -9,6 +9,8 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+import { throttle } from '#start/limiter'
+
 const CompaniesController = () => import('#controllers/companies_controller')
 const ContactsController = () => import('#controllers/contacts_controller')
 const QuotesController = () => import('#controllers/quotes_controller')
@@ -19,7 +21,7 @@ const StatisticsController = () => import('#controllers/statistics_controller')
 router
   .group(() => {
     router.get('/login', [SessionController, 'create']).as('session.create')
-    router.post('/login', [SessionController, 'store']).as('session.store')
+    router.post('/login', [SessionController, 'store']).use(throttle).as('session.store')
   })
   .use(middleware.guest())
 
