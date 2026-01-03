@@ -12,7 +12,7 @@
   },
   "invoice": {
     "title": "Facture",
-    "description": ["Madame, monsieur,", "Vous trouverez ci-dessous les détails de la commande: "],
+    "description": ["Madame, monsieur,", "Vous trouverez ci-dessous les détails de la facture: "],
     "meta": {
       "date": "Date de la facture: ",
       "order-number": "Commande N°: "
