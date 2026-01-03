@@ -35,9 +35,9 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     <form className={cn('flex flex-col gap-4', className)} onSubmit={handleSubmit} {...props}>
       <div className={'flex flex-col items-center justify-center gap-2 text-center'}>
         <img
-          className={'size-12'}
+          className={'h-12'}
           alt={t('features.auth.login-form.logoAlt')}
-          src={'/web-app-manifest-192x192.png'}
+          src={"/logo-96x96.webp"}
         />
         <h1 className={'text-xl font-semibold'}>{t('features.auth.login-form.title')}</h1>
         <span className={'text-muted-foreground'}>{t('features.auth.login-form.subtitle')}</span>
